@@ -1,5 +1,9 @@
 package com.example.practiceanything;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -22,6 +26,18 @@ public class MainActivity extends Activity {
 			public void onSelectedDayChange(CalendarView view, int year, int month,
 					int dayOfMonth) {
 				
+				long cviewdate = cal.getDate();
+                Calendar c = Calendar.getInstance();
+                c.setTimeInMillis(cviewdate);
+                c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+                int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
+                
+                DateFormat df = new SimpleDateFormat("EEE dd/MM/yyyy");
+                for (int i = 0; i < 7; i++) {
+                    System.out.println(df.format(c.getTime()));
+                    c.add(Calendar.DATE, 1);
+                }
+				
 				TextView tv = (TextView)findViewById(R.id.displayDate);
 				TextView tv2 = (TextView)findViewById(R.id.currentDay);
 				String day2 = Integer.toString(dayOfMonth);
@@ -30,9 +46,9 @@ public class MainActivity extends Activity {
 				int firstDayOfWeek = cal.getFirstDayOfWeek();
 				
 				
-//				Toast.makeText(MainActivity.this, "Month: " +month2+ "\n"+
-//													"Day:" +day2+ "\n"+ 
-//												   "Year: " +year2+ "\n", Toast.LENGTH_LONG).show();
+				Toast.makeText(MainActivity.this, "Month: " +month2+ "\n"+
+													"Day:" +dayOfWeek+ "\n"+ 
+												   "Year: " +year2+ "\n", Toast.LENGTH_LONG).show();
 				
 				
 				tv.setText(month2+" " +day2+ " " +year2);
