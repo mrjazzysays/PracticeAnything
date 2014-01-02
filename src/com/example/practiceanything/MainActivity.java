@@ -2,7 +2,9 @@ package com.example.practiceanything;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -32,12 +34,24 @@ public class MainActivity extends Activity {
                 c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
                 int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
                 
+                List<String> list = new ArrayList();
+                
+                
+                
                 DateFormat df = new SimpleDateFormat("EEE dd/MM/yyyy");
                 for (int i = 0; i < 7; i++) {
-                    System.out.println(df.format(c.getTime()));
+                    String weekday = (df.format(c.getTime()));
                     c.add(Calendar.DATE, 1);
+                    list.add(weekday);
+                    System.out.println(weekday);
+
                 }
 				
+                
+                String monday = list.get(list.size()-7);
+                String sunday = list.get(list.size()-1);
+                String listweek = "Week Selected: " + monday + " - " + sunday;
+                
 				TextView tv = (TextView)findViewById(R.id.displayDate);
 				TextView tv2 = (TextView)findViewById(R.id.currentDay);
 				String day2 = Integer.toString(dayOfMonth);
@@ -53,8 +67,8 @@ public class MainActivity extends Activity {
 				
 				tv.setText(month2+" " +day2+ " " +year2);
 				
-				String fdow = Integer.toString(firstDayOfWeek);
-				tv2.setText(fdow);
+				
+				tv2.setText(listweek);
 				
 				
 			}
