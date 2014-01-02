@@ -7,8 +7,12 @@ import java.util.Calendar;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.CalendarView.OnDateChangeListener;
 import android.widget.TextView;
@@ -50,7 +54,7 @@ public class MainActivity extends Activity {
                 
                 String monday = list.get(list.size()-7);
                 String sunday = list.get(list.size()-1);
-                String listweek = "Week Selected: " + monday + " - " + sunday;
+                final String listweek = "Week Selected: " + monday + " - " + sunday;
                 
 				TextView tv = (TextView)findViewById(R.id.displayDate);
 				TextView tv2 = (TextView)findViewById(R.id.currentDay);
@@ -69,8 +73,18 @@ public class MainActivity extends Activity {
 				
 				
 				tv2.setText(listweek);
+				final Intent i = new Intent(MainActivity.this, WeekActivity.class);
+				i.putExtra("listweek", listweek);
 				
-				
+				Button btn = (Button)findViewById(R.id.goToWeek);
+				btn.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View arg0) {
+						startActivity(i);
+						
+					}
+				});
 			}
 		});
 		
