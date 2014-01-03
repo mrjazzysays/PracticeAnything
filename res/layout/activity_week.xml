@@ -16,6 +16,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="30dp"
-        android:text="listWeek" />
+        android:text="listWeek"
+        android:textSize="30sp" />
 
 </RelativeLayout>

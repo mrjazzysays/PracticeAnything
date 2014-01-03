@@ -42,7 +42,7 @@ public class MainActivity extends Activity {
                 
                 
                 
-                DateFormat df = new SimpleDateFormat("EEE dd/MM/yyyy");
+                DateFormat df = new SimpleDateFormat("EEE MM/dd/yyyy");
                 for (int i = 0; i < 7; i++) {
                     String weekday = (df.format(c.getTime()));
                     c.add(Calendar.DATE, 1);
@@ -64,9 +64,9 @@ public class MainActivity extends Activity {
 				int firstDayOfWeek = cal.getFirstDayOfWeek();
 				
 				
-				Toast.makeText(MainActivity.this, "Month: " +month2+ "\n"+
-													"Day:" +dayOfWeek+ "\n"+ 
-												   "Year: " +year2+ "\n", Toast.LENGTH_LONG).show();
+//				Toast.makeText(MainActivity.this, "Month: " +month2+ "\n"+
+//													"Day:" +dayOfWeek+ "\n"+ 
+//								 				   "Year: " +year2+ "\n", Toast.LENGTH_LONG).show();
 				
 				
 				tv.setText(month2+" " +day2+ " " +year2);
