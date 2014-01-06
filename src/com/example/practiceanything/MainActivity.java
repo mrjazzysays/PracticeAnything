@@ -8,7 +8,11 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -24,7 +28,41 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-//		CalendarView yes = new CalendarView(null);
+		
+		DBHelper db = new DBHelper(this);
+		try {
+			db.addUser(new String("jeff"));
+		} catch (SQLiteException e ) {
+			Log.e("fail", e.toString(), e);
+		}
+
+		
+		db.getAllUsers();
+		
+		final SQLiteDatabase newDB = openOrCreateDatabase("newDB", MODE_PRIVATE, null);
+		final String TABLE_NAME = "users";
+        try {
+        	newDB.execSQL("CREATE TABLE IF NOT EXISTS "+ TABLE_NAME +" ('_id' integer primary key autoincrement, firstname text, lastname text);");
+        } catch (SQLiteException e) {
+        	Log.e("createTBLfailed", e.toString(), e);
+        }
+		
+        try {
+        	newDB.execSQL("INSERT INTO " + TABLE_NAME + "(firstname, lastname) VALUES('jeff', 'cedilla');");
+        } catch (SQLiteException e) {
+        	Log.e("insertTBLfailed", e.toString(), e);
+        }
+        
+        try {
+        	Cursor c = newDB.rawQuery("SELECT * FROM " + TABLE_NAME + "; ", null);
+        	c.moveToPosition(1);
+        	String usernameTest = c.getString(1).toString();
+        	Toast.makeText(MainActivity.this, usernameTest, Toast.LENGTH_LONG).show();
+        } catch (SQLiteException e) {
+        	Log.e("cursorFAIL", e.toString(), e);
+        }
+        
+        
 		final CalendarView cal = (CalendarView) findViewById(R.id.calendarView1);
 		cal.setOnDateChangeListener(new OnDateChangeListener() {
 			

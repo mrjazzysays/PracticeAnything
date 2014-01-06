@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.widget.ListView;
 import android.widget.TextView;
 
 public class WeekActivity extends Activity {
@@ -14,6 +15,8 @@ public class WeekActivity extends Activity {
 		setContentView(R.layout.activity_week);
 		
 		TextView tv = (TextView)findViewById(R.id.listWeek);
+		ListView lv = (ListView)findViewById(R.id.listView1);
+		
 		
 		Intent intent = getIntent();
 		String listweek = intent.getExtras().getString("listweek");
