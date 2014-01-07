@@ -10,17 +10,16 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
 
 public class DBHelper extends SQLiteOpenHelper {
 	private static final int DATABASE_VERSION = 1;
 	private static final String DATABASE_NAME = "db";
 	private static final String TABLE_USERS = "users";
-	private static final String KEY_ID = "'_id'";
+	private static final String KEY_ID = "_id";
 	private static final String COLUMN_FIRSTNAME = "firstname";
 	private static final String COLUMN_LASTNAME = "lastname";
-	private static final String DATABASE_CREATE = "create table if not exists" + TABLE_USERS + 
-			" (" + KEY_ID + " integer primary key autoincrement, " + COLUMN_FIRSTNAME + 
-			" text, " + COLUMN_LASTNAME + " text);";
+	private static final String DATABASE_CREATE = "create table if not exists users('_id' integer primary key autoincrement, firstname text, lastname text);";
 	
 	//constructor
 	public DBHelper(Context context) {
@@ -42,16 +41,46 @@ public class DBHelper extends SQLiteOpenHelper {
 		
 	}
 
-	void addUser(String string) {
+	void addUser(String firstname, String lastname) {
+		
+//		Toast.makeText(MainActivity.this, "yes", Toast.LENGTH_LONG).show();
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
-		values.put(COLUMN_FIRSTNAME, "jeff");
+		values.put(COLUMN_FIRSTNAME, firstname);
+		values.put(COLUMN_LASTNAME, lastname);
 		db.insert(TABLE_USERS, null, values);
+		
+		try { 
+			Cursor c = db.rawQuery("SELECT * FROM users;", null);
+			if (c!=null) {
+				c.moveToLast();
+				String lastUser = c.getString(2).toString() + c.getString(1).toString();
+				System.out.println(lastUser);
+//				Toast.makeText(haha, lastUser, Toast.LENGTH_LONG).show();
+			} else {
+				Context context = null;
+				Toast.makeText(context, "fail", Toast.LENGTH_LONG).show();
+			}
+
+//			if( c != null && c.moveToFirst() ){
+//				String tester = c.getString(1).toString();
+//				String tester2 = c.getString(1).toString();
+//				System.out.println(tester+tester2);
+//			} else {
+//				System.out.println("no");
+//			}
+
+			
+
+		} catch (SQLiteException e ) {
+			Log.e("addUSERfailed", e.toString(), e);
+		}
+
 		db.close();
 	}
 	
-	public List<String> getAllUsers() {
-		List<String> userList = new ArrayList<String>();
+	public final List<String> getAllUsers() {
+		final List<String> userList = new ArrayList<String>();
 		String selectQuery = "SELECT * FROM " + TABLE_USERS + ";";
 		
 		SQLiteDatabase db = this.getWritableDatabase();
@@ -59,7 +88,7 @@ public class DBHelper extends SQLiteOpenHelper {
 		if (c.moveToFirst()) {
             do {
                 String string = new String();
-                string = c.getString(1);
+                string = c.getString(1) + " " + c.getString(2);
                 // Adding contact to list
                 userList.add(string);
                 System.out.println(string);

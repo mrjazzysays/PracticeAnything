@@ -29,38 +29,40 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		DBHelper db = new DBHelper(this);
-		try {
-			db.addUser(new String("jeff"));
-		} catch (SQLiteException e ) {
-			Log.e("fail", e.toString(), e);
-		}
+		final DBHelper db = new DBHelper(this);
+//		try {
+//			db.addUser("sharon", "wee" );
+//			db.addUser("no", "yes");
+//			db.getAllUsers();
+//		} catch (SQLiteException e ) {
+//			Log.e("fail", e.toString(), e);
+//		}
 
 		
-		db.getAllUsers();
+//		db.getAllUsers();
 		
-		final SQLiteDatabase newDB = openOrCreateDatabase("newDB", MODE_PRIVATE, null);
-		final String TABLE_NAME = "users";
-        try {
-        	newDB.execSQL("CREATE TABLE IF NOT EXISTS "+ TABLE_NAME +" ('_id' integer primary key autoincrement, firstname text, lastname text);");
-        } catch (SQLiteException e) {
-        	Log.e("createTBLfailed", e.toString(), e);
-        }
-		
-        try {
-        	newDB.execSQL("INSERT INTO " + TABLE_NAME + "(firstname, lastname) VALUES('jeff', 'cedilla');");
-        } catch (SQLiteException e) {
-        	Log.e("insertTBLfailed", e.toString(), e);
-        }
-        
-        try {
-        	Cursor c = newDB.rawQuery("SELECT * FROM " + TABLE_NAME + "; ", null);
-        	c.moveToPosition(1);
-        	String usernameTest = c.getString(1).toString();
-        	Toast.makeText(MainActivity.this, usernameTest, Toast.LENGTH_LONG).show();
-        } catch (SQLiteException e) {
-        	Log.e("cursorFAIL", e.toString(), e);
-        }
+//		final SQLiteDatabase newDB = openOrCreateDatabase("newDB", MODE_PRIVATE, null);
+//		final String TABLE_NAME = "users";
+//        try {
+//        	newDB.execSQL("CREATE TABLE IF NOT EXISTS "+ TABLE_NAME +" ('_id' integer primary key autoincrement, firstname text, lastname text);");
+//        } catch (SQLiteException e) {
+//        	Log.e("createTBLfailed", e.toString(), e);
+//        }
+//		
+//        try {
+//        	newDB.execSQL("INSERT INTO " + TABLE_NAME + "(firstname, lastname) VALUES('jeff', 'cedilla');");
+//        } catch (SQLiteException e) {
+//        	Log.e("insertTBLfailed", e.toString(), e);
+//        }
+//        
+//        try {
+//        	Cursor c = newDB.rawQuery("SELECT * FROM " + TABLE_NAME + "; ", null);
+//        	c.moveToPosition(1);
+//        	String usernameTest = c.getString(1).toString();
+////        	Toast.makeText(MainActivity.this, usernameTest, Toast.LENGTH_LONG).show();
+//        } catch (SQLiteException e) {
+//        	Log.e("cursorFAIL", e.toString(), e);
+//        }
         
         
 		final CalendarView cal = (CalendarView) findViewById(R.id.calendarView1);
@@ -119,6 +121,7 @@ public class MainActivity extends Activity {
 					
 					@Override
 					public void onClick(View arg0) {
+						db.close();
 						startActivity(i);
 						
 					}
@@ -135,5 +138,12 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-
+//	protected void onDestroy() {
+//	    DBHelper db = new DBHelper(this);
+//		super.onDestroy();
+//	    if (db != null) {
+//	        db.close();
+//	    }
+//
+//	}
 }
