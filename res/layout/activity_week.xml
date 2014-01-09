@@ -8,15 +8,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".WeekActivity" >
 
-    <ListView
-        android:id="@+id/listView1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/listWeek"
-        android:layout_marginLeft="34dp" >
-    </ListView>
-
     <TextView
         android:id="@+id/listWeek"
         android:layout_width="wrap_content"
@@ -32,17 +23,19 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/listView1"
+        android:layout_alignParentTop="false"
+        android:layout_toRightOf="@+id/editText1"
+        android:layout_alignTop="@+id/editText1"
         android:text="Delete" />
 
     <EditText
         android:id="@+id/editText1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/deleteUsername"
+        
         android:layout_marginRight="17dp"
-        android:layout_toLeftOf="@+id/deleteUsername"
+        android:layout_toRightOf="@+id/listView1"
+        android:layout_below="@+id/editText2"
         android:ems="10"
         android:hint="delete username" />
 
@@ -51,20 +44,32 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/editText1"
+        android:layout_alignParentBottom="false"
+        android:layout_toRightOf="@+id/editText2"
         android:text="Add" />
 
     <EditText
         android:id="@+id/editText2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/addUser"
+        android:layout_alignParentBottom="false"
+        android:layout_toRightOf="@+id/listView1"
         android:ems="10"
-        android:hint="add username" >
+        android:hint="add username"
+         >
 
-        <requestFocus />
+        
     </EditText>
+
+    <ListView
+        android:id="@+id/listView1"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/listWeek"
+        android:layout_alignRight="@+id/listWeek"
+        
+        android:layout_below="@+id/listWeek" >
+    </ListView>
 
 </RelativeLayout>

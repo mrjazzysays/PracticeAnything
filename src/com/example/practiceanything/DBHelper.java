@@ -50,12 +50,13 @@ public class DBHelper extends SQLiteOpenHelper {
 		values.put(COLUMN_LASTNAME, lastname);
 		db.insert(TABLE_USERS, null, values);
 		
+		
 		try { 
 			Cursor c = db.rawQuery("SELECT * FROM users;", null);
 			if (c!=null) {
 				c.moveToLast();
-				String lastUser = c.getString(2).toString() + c.getString(1).toString();
-				System.out.println(lastUser);
+				String lastUser = c.getString(1).toString() + " " + c.getString(2).toString();
+				System.out.println("User added: " + lastUser);
 //				Toast.makeText(haha, lastUser, Toast.LENGTH_LONG).show();
 			} else {
 				Context context = null;
