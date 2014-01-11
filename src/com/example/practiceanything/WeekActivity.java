@@ -36,7 +36,8 @@ public class WeekActivity extends Activity {
 		final List<String> userList = db.getAllUsers();
 		
 		final DBHelperEventLog db2 = new DBHelperEventLog(this);
-		db2.addTask("DNAprep");
+		db2.addUserTask("Jeff");
+		db2.updateLastAddedTask("2014", "01", "10");
 		
 		final ArrayAdapter<String> aa = new ArrayAdapter<String>(this, R.layout.simple_list_item, userList);
 		lv.setAdapter(aa);
