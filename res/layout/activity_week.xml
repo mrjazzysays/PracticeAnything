@@ -6,17 +6,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:layout_margin="0dp"
     tools:context=".WeekActivity" >
-
-    <TextView
-        android:id="@+id/listWeek"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="20dp"
-        android:text="listWeek"
-        android:textSize="16sp" />
 
     <Button
         android:id="@+id/deleteUsername"
@@ -66,10 +57,29 @@
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/listWeek"
-        android:layout_alignRight="@+id/listWeek"
+        android:layout_alignLeft="@+id/users"
+        android:layout_alignRight="@+id/users"
         
-        android:layout_below="@+id/listWeek" >
+        android:layout_below="@+id/users" >
     </ListView>
+
+    <TextView
+        android:id="@+id/users"
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/listWeek"
+        android:layout_alignLeft="@+id/listWeek"
+        android:layout_alignParentLeft="true"
+        android:text="Users" />
+
+    <TextView
+        android:id="@+id/listWeek"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="187dp"
+        android:text="listWeek"
+        android:textSize="16sp" />
 
 </RelativeLayout>

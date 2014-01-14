@@ -11,7 +11,7 @@ import android.util.Log;
 public class DBHelperEventLog extends SQLiteOpenHelper{
 
 	private static final int DATABASE_VERSION = 1;
-	private static final String DATABASE_NAME = "db3";
+	private static final String DATABASE_NAME = "db";
 	private static final String TABLE_EVENTLOG = "eventlog2";
 	private static final String KEY_ID = "_id";
 	private static final String COLUMN_TASKNAME = "taskname";
