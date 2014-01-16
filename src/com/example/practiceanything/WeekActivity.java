@@ -32,6 +32,7 @@ public class WeekActivity extends Activity {
 		
 		Button btn = (Button)findViewById(R.id.deleteUsername);
 		Button btn2 = (Button)findViewById(R.id.addUser);
+		Button monBtn = (Button)findViewById(R.id.mondayBtn);
 		
 		final List<String> userList = db.getAllUsers();
 		
@@ -87,9 +88,11 @@ public class WeekActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position,
 					long id) {
-			      Toast.makeText(getApplicationContext(), ((TextView) view).getText(),
-			              Toast.LENGTH_SHORT).show();
-				
+				TextView tv = (TextView)findViewById(R.id.usernameCurrentSchedule);
+				tv.setText(((TextView) view).getText() + "'s Schedule");
+//			      Toast.makeText(getApplicationContext(), ((TextView) view).getText(),
+//			              Toast.LENGTH_SHORT).show();
+				tv.setVisibility(View.VISIBLE);
 			}
 		});
 		

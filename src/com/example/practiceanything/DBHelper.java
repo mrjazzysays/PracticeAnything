@@ -162,11 +162,9 @@ public class DBHelper extends SQLiteOpenHelper {
 		String monthPrint = cc.getString(5).toString();
 		String dayPrint = cc.getString(6).toString();
 		System.out.println("Row: " + lastRowId2 + " Year: " + yearPrint + " Month: " + monthPrint + " Day: " + dayPrint);
-
-		
-		
-		
 		db.close();
 	}
+	
+	
 	
 }

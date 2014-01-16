@@ -9,27 +9,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".WeekActivity" >
 
-    <EditText
-        android:id="@+id/editText1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/editText2"
-        android:layout_marginRight="17dp"
-        android:layout_toRightOf="@+id/listView1"
-        android:ems="10"
-        android:hint="delete username" />
-
-    <EditText
-        android:id="@+id/editText2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="false"
-        android:layout_below="@+id/listWeek"
-        android:layout_toRightOf="@+id/listView1"
-        android:ems="10"
-        android:hint="add username" >
-    </EditText>
-
     <ListView
         android:id="@+id/listView1"
         android:layout_width="match_parent"
@@ -58,24 +37,16 @@
         android:text="listWeek"
         android:textSize="16sp" />
 
-    <Button
-        android:id="@+id/addUser"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/editText2"
-        android:layout_toRightOf="@+id/editText2"
-        android:text="Add" />
-
     <LinearLayout
+        android:id="@+id/linearLayout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/listWeek"
-        android:layout_below="@+id/deleteUsername"
-        android:layout_alignParentRight="true" >
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/deleteUsername" >
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/mondayBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/button3"
@@ -85,14 +56,14 @@
             android:text="M" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/tuesdayBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="T" />
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/wednesdayBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/button4"
@@ -102,7 +73,7 @@
             android:text="W" />
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/thursdayBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/deleteUsername"
@@ -111,7 +82,7 @@
             android:text="Th" />
 
         <Button
-            android:id="@+id/button6"
+            android:id="@+id/fridayBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/button5"
@@ -121,7 +92,7 @@
             android:text="F" />
 
         <Button
-            android:id="@+id/button7"
+            android:id="@+id/saturdayBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/button6"
@@ -131,20 +102,123 @@
             android:text="Sa" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/sundayBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Su" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/linearLayout1"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/linearLayout1"
+        android:layout_below="@+id/linearLayout1"
+        android:layout_marginBottom="159dp" >
+
+        <ListView
+            android:id="@+id/mondayList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+        </ListView>
+
+        <ListView
+            android:id="@+id/tuesdayList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+        </ListView>
+
+        <ListView
+            android:id="@+id/wednesdayList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+        </ListView>
+
+        <ListView
+            android:id="@+id/thursdayList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+        </ListView>
+
+        <ListView
+            android:id="@+id/fridayList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+        </ListView>
+
+        <ListView
+            android:id="@+id/saturdayList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+        </ListView>
+
+        <ListView
+            android:id="@+id/sundayList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+        </ListView>
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/users"
+        android:layout_marginRight="111dp"
+        android:ems="10"
+        android:hint="add username" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/editText2"
+        android:layout_marginRight="111dp"
+        android:ems="10"
+        android:hint="delete username" />
+
+    <Button
+        android:id="@+id/addUser"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/editText2"
+        android:layout_marginRight="61dp"
+        android:text="Add" />
+
     <Button
         android:id="@+id/deleteUsername"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/editText1"
+        android:layout_alignBottom="@+id/editText1"
         android:layout_alignLeft="@+id/addUser"
-        android:layout_alignTop="@+id/editText1"
         android:text="Delete" />
+
+    <TextView
+        android:id="@+id/usernameCurrentSchedule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/listWeek"
+        android:layout_alignTop="@+id/listView1"
+        android:text="usernameCurrentSchedule"
+        android:visibility="invisible"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>
