@@ -13,6 +13,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.MonthDisplayHelper;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -28,41 +29,9 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
-		final DBHelper db = new DBHelper(this);
-//		try {
-//			db.addUser("sharon", "wee" );
-//			db.addUser("no", "yes");
-//			db.getAllUsers();
-//		} catch (SQLiteException e ) {
-//			Log.e("fail", e.toString(), e);
-//		}
 
-		
-//		db.getAllUsers();
-		
-//		final SQLiteDatabase newDB = openOrCreateDatabase("newDB", MODE_PRIVATE, null);
-//		final String TABLE_NAME = "users";
-//        try {
-//        	newDB.execSQL("CREATE TABLE IF NOT EXISTS "+ TABLE_NAME +" ('_id' integer primary key autoincrement, firstname text, lastname text);");
-//        } catch (SQLiteException e) {
-//        	Log.e("createTBLfailed", e.toString(), e);
-//        }
-//		
-//        try {
-//        	newDB.execSQL("INSERT INTO " + TABLE_NAME + "(firstname, lastname) VALUES('jeff', 'cedilla');");
-//        } catch (SQLiteException e) {
-//        	Log.e("insertTBLfailed", e.toString(), e);
-//        }
-//        
-//        try {
-//        	Cursor c = newDB.rawQuery("SELECT * FROM " + TABLE_NAME + "; ", null);
-//        	c.moveToPosition(1);
-//        	String usernameTest = c.getString(1).toString();
-////        	Toast.makeText(MainActivity.this, usernameTest, Toast.LENGTH_LONG).show();
-//        } catch (SQLiteException e) {
-//        	Log.e("cursorFAIL", e.toString(), e);
-//        }
+		final DBHelper db = new DBHelper(this);
+
         
         
 		final CalendarView cal = (CalendarView) findViewById(R.id.calendarView1);
@@ -92,8 +61,50 @@ public class MainActivity extends Activity {
                 }
 				
                 
-                String monday = list.get(list.size()-7);
-                String sunday = list.get(list.size()-1);
+                final String monday = list.get(list.size()-7);
+                final String tuesday= list.get(list.size()-6);
+                final String wednesday= list.get(list.size()-5);
+                final String thursday= list.get(list.size()-4);
+                final String friday= list.get(list.size()-3);
+                final String saturday= list.get(list.size()-2);
+                final String sunday = list.get(list.size()-1);
+                
+                
+
+                
+                TransferDays td = new TransferDays();
+                final String mondayMod = td.getDayInfo(monday);
+                final String tuesdayMod = td.getDayInfo(tuesday);
+                final String wednesdayMod = td.getDayInfo(wednesday);
+                final String thursdayMod = td.getDayInfo(thursday);
+                final String fridayMod = td.getDayInfo(friday);
+                final String saturdayMod = td.getDayInfo(saturday);
+                final String sundayMod = td.getDayInfo(sunday);
+                
+                final String mondayDay = td.getDayOnlyInfo(monday);
+                final String tuesdayDay = td.getDayOnlyInfo(tuesday);
+                final String wednesdayDay = td.getDayOnlyInfo(wednesday);
+                final String thursdayDay = td.getDayOnlyInfo(thursday);
+                final String fridayDay = td.getDayOnlyInfo(friday);
+                final String saturdayDay = td.getDayOnlyInfo(saturday);
+                final String sundayDay = td.getDayOnlyInfo(sunday);
+                
+                final String mondayMonth = td.getMonthOnlyInfo(monday);
+                final String tuesdayMonth = td.getMonthOnlyInfo(tuesday);
+                final String wednesdayMonth = td.getMonthOnlyInfo(wednesday);
+                final String thursdayMonth = td.getMonthOnlyInfo(thursday);
+                final String fridayMonth = td.getMonthOnlyInfo(friday);
+                final String saturdayMonth = td.getMonthOnlyInfo(saturday);
+                final String sundayMonth = td.getMonthOnlyInfo(sunday);
+                
+                final String mondayYear = td.getYearOnlyInfo(monday);
+                final String tuesdayYear = td.getYearOnlyInfo(tuesday);
+                final String wednesdayYear = td.getYearOnlyInfo(wednesday);
+                final String thursdayYear = td.getYearOnlyInfo(thursday);
+                final String fridayYear = td.getYearOnlyInfo(friday);
+                final String saturdayYear = td.getYearOnlyInfo(saturday);
+                final String sundayYear = td.getYearOnlyInfo(sunday);
+                
                 final String listweek = "Week Selected: " + monday + " - " + sunday;
                 
 				TextView tv = (TextView)findViewById(R.id.displayDate);
@@ -104,9 +115,7 @@ public class MainActivity extends Activity {
 				int firstDayOfWeek = cal.getFirstDayOfWeek();
 				
 				
-//				Toast.makeText(MainActivity.this, "Month: " +month2+ "\n"+
-//													"Day:" +dayOfWeek+ "\n"+ 
-//								 				   "Year: " +year2+ "\n", Toast.LENGTH_LONG).show();
+
 				
 				
 				tv.setText(month2+" " +day2+ " " +year2);
@@ -115,6 +124,37 @@ public class MainActivity extends Activity {
 				tv2.setText(listweek);
 				final Intent i = new Intent(MainActivity.this, WeekActivity.class);
 				i.putExtra("listweek", listweek);
+				i.putExtra("mondayMod", mondayMod);
+				i.putExtra("tuesdayMod", tuesdayMod);
+				i.putExtra("wednesdayMod", wednesdayMod);
+				i.putExtra("thursdayMod", thursdayMod);
+				i.putExtra("fridayMod", fridayMod);
+				i.putExtra("saturdayMod", saturdayMod);
+				i.putExtra("sundayMod", sundayMod);
+				
+				i.putExtra("mondayDay", mondayDay);
+				i.putExtra("tuesdayDay", tuesdayDay);
+				i.putExtra("wednesdayDay", wednesdayDay);
+				i.putExtra("thursdayDay", thursdayDay);
+				i.putExtra("fridayDay", fridayDay);
+				i.putExtra("saturdayDay", saturdayDay);
+				i.putExtra("sundayDay", sundayDay);
+				
+				i.putExtra("mondayMonth", mondayMonth);
+				i.putExtra("tuesdayMonth", tuesdayMonth);
+				i.putExtra("wednesdayMonth", wednesdayMonth);
+				i.putExtra("thursdayMonth", thursdayMonth);
+				i.putExtra("fridayMonth", fridayMonth);
+				i.putExtra("saturdayMonth", saturdayMonth);
+				i.putExtra("sundayMonth", sundayMonth);
+				
+				i.putExtra("mondayYear", mondayYear);
+				i.putExtra("tuesdayYear", tuesdayYear);
+				i.putExtra("wednesdayYear", wednesdayYear);
+				i.putExtra("thursdayYear", thursdayYear);
+				i.putExtra("fridayYear", fridayYear);
+				i.putExtra("saturdayYear", saturdayYear);
+				i.putExtra("sundayYear", sundayYear);
 				
 				Button btn = (Button)findViewById(R.id.goToWeek);
 				btn.setOnClickListener(new OnClickListener() {
@@ -132,18 +172,13 @@ public class MainActivity extends Activity {
 		
 	}
 
+
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-//	protected void onDestroy() {
-//	    DBHelper db = new DBHelper(this);
-//		super.onDestroy();
-//	    if (db != null) {
-//	        db.close();
-//	    }
-//
-//	}
+
 }

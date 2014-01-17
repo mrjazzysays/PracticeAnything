@@ -26,6 +26,10 @@
             android:name="com.example.practiceanything.WeekActivity"
             android:label="@string/title_activity_week" >
         </activity>
+        <activity
+            android:name="com.example.practiceanything.TaskEnterActivity"
+            android:label="@string/title_activity_task_enter" >
+        </activity>
     </application>
 
 </manifest>

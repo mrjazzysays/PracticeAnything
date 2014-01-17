@@ -23,27 +23,76 @@ public class WeekActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_week);
-		final DBHelper db = new DBHelper(this);
-		TextView tv = (TextView)findViewById(R.id.listWeek);
-		final ListView lv = (ListView)findViewById(R.id.listView1);
 		
+		final DBHelper db = new DBHelper(this);
+		
+		TextView tv = (TextView)findViewById(R.id.listWeek);
+		
+		final ListView lv = (ListView)findViewById(R.id.listView1);
+				
 		final EditText et = (EditText)findViewById(R.id.editText1);
 		final EditText et2 = (EditText)findViewById(R.id.editText2);
 		
-		Button btn = (Button)findViewById(R.id.deleteUsername);
-		Button btn2 = (Button)findViewById(R.id.addUser);
-		Button monBtn = (Button)findViewById(R.id.mondayBtn);
+		Button deleteUserbtn = (Button)findViewById(R.id.deleteUsername);
+		Button addUserbtn = (Button)findViewById(R.id.addUser);
+		Button mondayBtn = (Button)findViewById(R.id.mondayBtn);
+		Button tuesdayBtn = (Button)findViewById(R.id.tuesdayBtn);
+		Button wednesdayBtn = (Button)findViewById(R.id.wednesdayBtn);
+		Button thursdayBtn = (Button)findViewById(R.id.thursdayBtn);
+		Button fridayBtn = (Button)findViewById(R.id.fridayBtn);
+		Button saturdayBtn = (Button)findViewById(R.id.saturdayBtn);
+		Button sundayBtn = (Button)findViewById(R.id.sundayBtn);
 		
 		final List<String> userList = db.getAllUsers();
-		
-		
-		db.addUserTask("Jeff");
-		db.updateLastAddedTask("2014", "01", "10");
-		
+			
 		final ArrayAdapter<String> aa = new ArrayAdapter<String>(this, R.layout.simple_list_item, userList);
 		lv.setAdapter(aa);
 		
-		btn.setOnClickListener(new OnClickListener() {
+		Intent intent = getIntent();
+		String listweek = intent.getExtras().getString("listweek");
+		tv.setText(listweek);
+		
+		final String mondayMod = intent.getExtras().getString("mondayMod");
+		final String tuesdayMod = intent.getExtras().getString("tuesdayMod");
+		final String wednesdayMod = intent.getExtras().getString("wednesdayMod");
+		final String thursdayMod = intent.getExtras().getString("thursdayMod");
+		final String fridayMod = intent.getExtras().getString("fridayMod");
+		final String saturdayMod = intent.getExtras().getString("saturdayMod");
+		final String sundayMod = intent.getExtras().getString("sundayMod");
+		
+		final String mondayDay = intent.getExtras().getString("mondayDay");
+		final String tuesdayDay = intent.getExtras().getString("tuesdayDay");
+		final String wednesdayDay = intent.getExtras().getString("wednesdayDay");
+		final String thursdayDay = intent.getExtras().getString("thursdayDay");
+		final String fridayDay = intent.getExtras().getString("fridayDay");
+		final String saturdayDay = intent.getExtras().getString("saturdayDay");
+		final String sundayDay = intent.getExtras().getString("sundayDay");
+		
+		final String mondayMonth = intent.getExtras().getString("mondayMonth");
+		final String tuesdayMonth = intent.getExtras().getString("tuesdayMonth");
+		final String wednesdayMonth = intent.getExtras().getString("wednesdayMonth");
+		final String thursdayMonth = intent.getExtras().getString("thursdayMonth");
+		final String fridayMonth = intent.getExtras().getString("fridayMonth");
+		final String saturdayMonth = intent.getExtras().getString("saturdayMonth");
+		final String sundayMonth = intent.getExtras().getString("fridayMonth");
+		
+		final String mondayYear = intent.getExtras().getString("mondayYear");
+		final String tuesdayYear = intent.getExtras().getString("tuesdayYear");
+		final String wednesdayYear = intent.getExtras().getString("wednesdayYear");
+		final String thursdayYear = intent.getExtras().getString("thursdayYear");
+		final String fridayYear = intent.getExtras().getString("fridayYear");
+		final String saturdayYear = intent.getExtras().getString("saturdayYear");
+		final String sundayYear = intent.getExtras().getString("sundayYear");
+		
+		mondayBtn.setText(mondayMod);
+		tuesdayBtn.setText(tuesdayMod);
+		wednesdayBtn.setText(wednesdayMod);
+		thursdayBtn.setText(thursdayMod);
+		fridayBtn.setText(fridayMod);
+		saturdayBtn.setText(saturdayMod);
+		sundayBtn.setText(sundayMod);
+		
+		deleteUserbtn.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -60,7 +109,7 @@ public class WeekActivity extends Activity {
 			}
 		});
 		
-		btn2.setOnClickListener(new OnClickListener() {
+		addUserbtn.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -76,25 +125,47 @@ public class WeekActivity extends Activity {
 			}
 		});
 		
-
-		
-		
-		Intent intent = getIntent();
-		String listweek = intent.getExtras().getString("listweek");
-		tv.setText(listweek);
-		
 		lv.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position,
 					long id) {
-				TextView tv = (TextView)findViewById(R.id.usernameCurrentSchedule);
+				final TextView tv = (TextView)findViewById(R.id.usernameCurrentSchedule);
 				tv.setText(((TextView) view).getText() + "'s Schedule");
-//			      Toast.makeText(getApplicationContext(), ((TextView) view).getText(),
-//			              Toast.LENGTH_SHORT).show();
+				String userSelected =(String) (lv.getItemAtPosition(position));
+				db.addUserTask(userSelected);
 				tv.setVisibility(View.VISIBLE);
 			}
 		});
+		
+		mondayBtn.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				
+				db.updateLastAddedTask(mondayYear, mondayMonth, mondayDay);
+				Intent i = new Intent(WeekActivity.this, TaskEnterActivity.class);
+				i.putExtra("mondayMod", mondayMod);
+				i.putExtra("mondayDay", mondayDay);
+				startActivity(i);
+				
+				
+				
+			}
+		});
+		
+		tuesdayBtn.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(WeekActivity.this, TaskEnterActivity.class);
+				i.putExtra("tuesdayMod", tuesdayMod);
+				startActivity(i);
+				
+			}
+		});
+		
+
 		
 	}
 
