@@ -135,6 +135,8 @@ public class WeekActivity extends Activity {
 				String userSelected =(String) (lv.getItemAtPosition(position));
 				db.addUserTask(userSelected);
 				tv.setVisibility(View.VISIBLE);
+				String lastRowName = db.getLastRowUserName();
+				System.out.println(lastRowName);
 			}
 		});
 		
@@ -147,6 +149,8 @@ public class WeekActivity extends Activity {
 				Intent i = new Intent(WeekActivity.this, TaskEnterActivity.class);
 				i.putExtra("mondayMod", mondayMod);
 				i.putExtra("mondayDay", mondayDay);
+				i.putExtra("mondayMonth", mondayMonth);
+				i.putExtra("mondayYear", mondayYear);
 				startActivity(i);
 				
 				

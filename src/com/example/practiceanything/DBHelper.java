@@ -1,5 +1,6 @@
 package com.example.practiceanything;
 
+import java.security.acl.LastOwnerException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +31,8 @@ public class DBHelper extends SQLiteOpenHelper {
 	private static final String TABLE_USERS_CREATE = "create table if not exists users('_id' integer primary key autoincrement, firstname text);";
 	private static final String TABLE_EVENTLOG_CREATE = "create table if not exists eventlog2('_id' integer primary key autoincrement, taskname text, duration int, name text, year text, month text," +
 			"day text);";
-	//constructor
+	private static final String TABLE_USERS_PERSONALEVENTS_CREATE = "create table if not exists usersevents('_id' integer primary key autoincrement, taskname text);"; 
+				//constructor
 	public DBHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 		}
@@ -39,6 +41,7 @@ public class DBHelper extends SQLiteOpenHelper {
 		try {
 			db.execSQL(TABLE_USERS_CREATE);
 			db.execSQL(TABLE_EVENTLOG_CREATE);
+			db.execSQL(TABLE_USERS_PERSONALEVENTS_CREATE);
 		} catch (SQLiteException e){
 			Log.e("createFAIL", e.toString(), e);
 		}
@@ -47,17 +50,16 @@ public class DBHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		// TODO Auto-generated method stub
+
 		
 	}
 
 	void addUser(String firstname) {
 		
-//		Toast.makeText(MainActivity.this, "yes", Toast.LENGTH_LONG).show();
+
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
 		values.put(COLUMN_FIRSTNAME, firstname);
-//		values.put(COLUMN_LASTNAME, lastname);
 		db.insert(TABLE_USERS, null, values);
 		
 		
@@ -67,26 +69,15 @@ public class DBHelper extends SQLiteOpenHelper {
 				c.moveToLast();
 				String lastUser = c.getString(1).toString();
 				System.out.println("User added: " + lastUser);
-//				Toast.makeText(haha, lastUser, Toast.LENGTH_LONG).show();
+
 			} else {
 				Context context = null;
 				Toast.makeText(context, "fail", Toast.LENGTH_LONG).show();
 			}
 
-//			if( c != null && c.moveToFirst() ){
-//				String tester = c.getString(1).toString();
-//				String tester2 = c.getString(1).toString();
-//				System.out.println(tester+tester2);
-//			} else {
-//				System.out.println("no");
-//			}
-
-			
-
 		} catch (SQLiteException e ) {
 			Log.e("addUSERfailed", e.toString(), e);
 		}
-
 		db.close();
 	}
 	
@@ -165,6 +156,19 @@ public class DBHelper extends SQLiteOpenHelper {
 		db.close();
 	}
 	
-	
+	public String getLastRowUserName() {
+		SQLiteDatabase db = this.getWritableDatabase();
+		String lastUsername = null;
+		Cursor c = db.rawQuery("select * from eventlog2;", null);
+			
+			if (c!=null) {
+				c.moveToLast();
+				lastUsername = c.getString(3).toString();
+				System.out.println(lastUsername);
+			}
+		return lastUsername;
+
+		
+	}
 	
 }

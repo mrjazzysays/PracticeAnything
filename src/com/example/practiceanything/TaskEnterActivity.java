@@ -12,12 +12,32 @@ public class TaskEnterActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_task_enter);
+		
 		TextView tv = (TextView)findViewById(R.id.dayMod);
 		
 		Intent intent = getIntent();
-		final String mondayMod = intent.getExtras().getString("mondayMod") + "day, " + intent.getExtras().getString("mondayDay");
+		final String scheduleFor = "Schedule For ";
+		final String mondayMod = intent.getExtras().getString("mondayMod");
+		final String tuesdayMod = intent.getExtras().getString("tuesdayMod");
 		
-		tv.setText(mondayMod);
+		final String mondayDay = intent.getExtras().getString("mondayDay");
+		
+		final String mondayMonth = intent.getExtras().getString("mondayMonth");
+		
+		final String mondayYear = intent.getExtras().getString("mondayYear");
+		
+		if (mondayMod!=null) {
+			tv.setText(scheduleFor + "Monday, " + mondayMonth +"-" + mondayDay + "-" + mondayYear);
+			} else {
+			System.out.println("mondayMod has NOTHING");
+			}
+		
+		if (tuesdayMod!=null) {
+			System.out.println("tuesdayMod has stuff in it");
+		} else {
+			System.out.println("tuesdayMod has NOTHING");
+		}
+		
 		
 	}
 
