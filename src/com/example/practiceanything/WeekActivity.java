@@ -135,8 +135,7 @@ public class WeekActivity extends Activity {
 				String userSelected =(String) (lv.getItemAtPosition(position));
 				db.addUserTask(userSelected);
 				tv.setVisibility(View.VISIBLE);
-				String lastRowName = db.getLastRowUserName();
-				System.out.println(lastRowName);
+
 			}
 		});
 		
@@ -146,7 +145,10 @@ public class WeekActivity extends Activity {
 			public void onClick(View arg0) {
 				
 				db.updateLastAddedTask(mondayYear, mondayMonth, mondayDay);
+				String lastRowName = db.getLastRowUserName();
+				
 				Intent i = new Intent(WeekActivity.this, TaskEnterActivity.class);
+				i.putExtra("lastRowName", lastRowName);
 				i.putExtra("mondayMod", mondayMod);
 				i.putExtra("mondayDay", mondayDay);
 				i.putExtra("mondayMonth", mondayMonth);

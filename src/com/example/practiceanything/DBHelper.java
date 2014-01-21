@@ -167,8 +167,13 @@ public class DBHelper extends SQLiteOpenHelper {
 				System.out.println(lastUsername);
 			}
 		return lastUsername;
-
-		
+		}
+	
+	public void createPersonalizedTask(String taskname) {
+		SQLiteDatabase db = this.getWritableDatabase();
+		ContentValues values = new ContentValues();
+		values.put(COLUMN_TASKNAME, taskname);
+		db.insert(TABLE_USERS_PERSONALEVENTS_CREATE, COLUMN_TASKNAME, values);
 	}
 	
 }
