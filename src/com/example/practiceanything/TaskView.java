@@ -29,6 +29,7 @@ public class TaskView extends LinearLayout{
 	public void addButtonToLinearLayout(LinearLayout rl) {
 		addBtn.setId(1);
 		rl.addView(addBtn);
+		
 	}
 	
 	public void addSubButtonToLinearLayout(LinearLayout rl) {

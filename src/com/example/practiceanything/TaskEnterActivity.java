@@ -1,13 +1,15 @@
 package com.example.practiceanything;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -29,12 +31,19 @@ public class TaskEnterActivity extends Activity {
 //		final LinearLayout addTaskLL = new LinearLayout(getBaseContext());
 		final ListView addTaskLV = (ListView)findViewById(R.id.addTaskList);
 		
-//		LayoutInflater inflator = (LayoutInflater).getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		LayoutInflater inflator = LayoutInflater.from(getBaseContext());
+		View v = inflator.inflate(R.layout.taskview, null);
+		enterTaskLL.addView(v);
 		
+		ArrayList<String> testList = new ArrayList<String>();
+		testList.add("words");
+		testList.add("work");
+		ArrayAdapter<String> aa = new ArrayAdapter<String>(this, R.layout.taskview, R.id.taskName, testList);
+		addTaskLV.setAdapter(aa);
 		
-		TaskView taskview = new TaskView(this);
-		taskview.addButtonToLinearLayout(enterTaskLL);
-		taskview.addSubButtonToLinearLayout(enterTaskLL);
+//		TaskView taskview = new TaskView(this);
+//		taskview.addButtonToLinearLayout(enterTaskLL);
+//		taskview.addSubButtonToLinearLayout(enterTaskLL);
 //		taskview.addLinearLayoutToLinearLayout(enterTaskLL, "New DNA Isolation",1);
 //		List<String> list = new List[]();
 //		taskview.addLinearLayoutToLinearLayout(enterTaskLL, "Accessioning",2);
