@@ -1,13 +1,16 @@
 package com.example.practiceanything;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -23,13 +26,21 @@ public class TaskEnterActivity extends Activity {
 		final Button addTaskbtn = (Button)findViewById(R.id.addTask);
 		final RelativeLayout enterTaskRL = (RelativeLayout)findViewById(R.id.activityTaskEnterRL);
 		final LinearLayout enterTaskLL = (LinearLayout)findViewById(R.id.activityEnterTaskEnterMainLL);
-		final LinearLayout addTaskLL = new LinearLayout(getBaseContext());
+//		final LinearLayout addTaskLL = new LinearLayout(getBaseContext());
+		final ListView addTaskLV = (ListView)findViewById(R.id.addTaskList);
 		
-
+//		LayoutInflater inflator = (LayoutInflater).getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		
+		
 		TaskView taskview = new TaskView(this);
-//		taskview.subtractHours();
-		taskview.addLinearLayoutToLinearLayout(enterTaskLL, "New DNA Isolation");
-		taskview.addLinearLayoutToLinearLayout(enterTaskLL, "Accessioning");
+		taskview.addButtonToLinearLayout(enterTaskLL);
+		taskview.addSubButtonToLinearLayout(enterTaskLL);
+//		taskview.addLinearLayoutToLinearLayout(enterTaskLL, "New DNA Isolation",1);
+//		List<String> list = new List[]();
+//		taskview.addLinearLayoutToLinearLayout(enterTaskLL, "Accessioning",2);
+		
+//		View populatesaddTaskLV = LayoutInflater.from(getBaseContext()).inflate(R.layout.taskview, null);
+//		enterTaskLL.addView(populatesaddTaskLV);
 		
 		
 		Intent intent = getIntent();

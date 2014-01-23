@@ -28,7 +28,7 @@ public class WeekActivity extends Activity {
 		
 		TextView tv = (TextView)findViewById(R.id.listWeek);
 		
-		final ListView lv = (ListView)findViewById(R.id.listView1);
+		final ListView lv = (ListView)findViewById(R.id.addTaskList);
 				
 		final EditText et = (EditText)findViewById(R.id.editText1);
 		final EditText et2 = (EditText)findViewById(R.id.editText2);

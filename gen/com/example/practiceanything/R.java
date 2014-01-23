@@ -28,6 +28,7 @@ public final class R {
         public static final int activityEnterTaskEnterMainLL=0x7f080005;
         public static final int activityTaskEnterRL=0x7f080004;
         public static final int addTask=0x7f080006;
+        public static final int addTaskList=0x7f080008;
         public static final int addUser=0x7f080021;
         public static final int button3=0x7f08000e;
         public static final int button4=0x7f080011;
@@ -46,7 +47,6 @@ public final class R {
         public static final int hourNumber=0x7f080026;
         public static final int lessHours=0x7f080025;
         public static final int linearLayout1=0x7f08000b;
-        public static final int listView1=0x7f080008;
         public static final int listWeek=0x7f08000a;
         public static final int mondayBtn=0x7f08000d;
         public static final int mondayList=0x7f080018;
@@ -68,12 +68,10 @@ public final class R {
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
-        public static final int activity_task=0x7f030001;
-        public static final int activity_task_enter=0x7f030002;
-        public static final int activity_week=0x7f030003;
-        public static final int simple_list_item=0x7f030004;
-        public static final int taskview=0x7f030005;
-        public static final int testing=0x7f030006;
+        public static final int activity_task_enter=0x7f030001;
+        public static final int activity_week=0x7f030002;
+        public static final int simple_list_item=0x7f030003;
+        public static final int taskview=0x7f030004;
     }
     public static final class menu {
         public static final int main=0x7f070000;

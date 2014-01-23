@@ -26,19 +26,32 @@ public class TaskView extends LinearLayout{
 	int i = 0;
 	
 
+	public void addButtonToLinearLayout(LinearLayout rl) {
+		addBtn.setId(1);
+		rl.addView(addBtn);
+	}
 	
-	public void addLinearLayoutToLinearLayout(LinearLayout rl, String taskname) {
+	public void addSubButtonToLinearLayout(LinearLayout rl) {
+		addBtn.setId(2);
+		rl.addView(addBtn);
+	}
+	
+	public void addLinearLayoutToLinearLayout(LinearLayout rl, String taskname, int id) {
 
 		 
 		subtractBtn.setText("-");
+		subtractBtn.setId(id);
 		addBtn.setText("+");
+		addBtn.setId(id);
 		tasknameTv.setText(taskname);
+		tasknameTv.setId(id);
 //		hoursAmountTv.setText("1");
 		ll.addView(tasknameTv);
 		ll.addView(subtractBtn);
 		ll.addView(hoursAmountTv);
 		ll.addView(addBtn);
 		ll.setOrientation(HORIZONTAL);
+		ll.setId(id);
 		rl.addView(ll);
 		
 		subtractBtn.setOnClickListener(new OnClickListener() {
