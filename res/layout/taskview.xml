@@ -21,19 +21,23 @@
             android:id="@+id/lessHours"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Less" />
+            android:text="-"
+            android:focusable="false"
+            android:onClick="onSubtractHourClick" />
 
         <TextView
             android:id="@+id/hourNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="HourNumber" />
+            android:text="0" />
 
         <Button
             android:id="@+id/moreHours"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="More" />
+            android:text="+"
+            android:focusable="false"
+            android:onClick="onAddHourClick" />
 
     </LinearLayout>
 
