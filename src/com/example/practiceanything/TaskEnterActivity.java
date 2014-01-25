@@ -2,6 +2,8 @@ package com.example.practiceanything;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,7 +13,6 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -21,6 +22,11 @@ import android.widget.TextView;
 
 public class TaskEnterActivity extends Activity {
 	double hoursWorked = 0;
+	Map<String, String> testMap = new HashMap();
+	String strHoursWorked = String.valueOf(hoursWorked);
+	DBHelper db = new DBHelper(this);
+	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -41,6 +47,18 @@ public class TaskEnterActivity extends Activity {
 //		View v = inflator.inflate(R.layout.taskview, null);
 //		enterTaskLL.addView(v);
 		
+		Intent intent = getIntent();
+		final String lastRowName = intent.getExtras().getString("lastRowName");
+		final String scheduleFor = lastRowName + "'s Schedule For ";
+		final String mondayMod = intent.getExtras().getString("mondayMod");
+		final String tuesdayMod = intent.getExtras().getString("tuesdayMod");
+		
+		final String mondayDay = intent.getExtras().getString("mondayDay");
+		
+		final String mondayMonth = intent.getExtras().getString("mondayMonth");
+		
+		final String mondayYear = intent.getExtras().getString("mondayYear");
+		
 		ArrayList<String> testList = new ArrayList<String>();
 		String[] otherList = {"array1","array2"};
 		testList.addAll(Arrays.asList(otherList));
@@ -54,11 +72,11 @@ public class TaskEnterActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				System.out.println("does it work?!");
+				
 				String itemPosition = String.valueOf(addTaskLV.getItemAtPosition(arg2));
 				System.out.println(itemPosition);
-			
-				
+				testMap.put(itemPosition, strHoursWorked);
+				System.out.println("Really doe: " + testMap.get(itemPosition));
 			}
 		
 		});
@@ -84,17 +102,7 @@ public class TaskEnterActivity extends Activity {
 //		enterTaskLL.addView(populatesaddTaskLV);
 		
 		
-		Intent intent = getIntent();
-		final String lastRowName = intent.getExtras().getString("lastRowName");
-		final String scheduleFor = lastRowName + "'s Schedule For ";
-		final String mondayMod = intent.getExtras().getString("mondayMod");
-		final String tuesdayMod = intent.getExtras().getString("tuesdayMod");
-		
-		final String mondayDay = intent.getExtras().getString("mondayDay");
-		
-		final String mondayMonth = intent.getExtras().getString("mondayMonth");
-		
-		final String mondayYear = intent.getExtras().getString("mondayYear");
+
 		
 		if (mondayMod!=null) {
 			tv.setText(scheduleFor + "Monday, " + mondayMonth +"-" + mondayDay + "-" + mondayYear);
@@ -141,7 +149,7 @@ public class TaskEnterActivity extends Activity {
         final Button subtractBtnChild = (Button)vwParentRow.getChildAt(1);
         final Button addBtnChild = (Button)vwParentRow.getChildAt(3);
         
-        final ArrayList<String> hourList = new ArrayList<String>();
+        
 //        btnChild.setText(hourNumber.getText());
         
         
@@ -149,12 +157,58 @@ public class TaskEnterActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
+				final ArrayList<String> subtractHourList = new ArrayList<String>();
 				hoursWorked-=.5;
+				String rowTaskName = (String) child.getText();
 				String strHoursWorked = String.valueOf(hoursWorked);
+				
+				
+				testMap.put(rowTaskName, strHoursWorked);
+				String valueOfRowInHoursWorked = testMap.get(rowTaskName);
+				
 				System.out.println(strHoursWorked);
-				hourList.add(strHoursWorked);
+				System.out.println(rowTaskName + " has a value of: " + valueOfRowInHoursWorked);
+				System.out.println("array1: " + testMap.get(rowTaskName));
+				System.out.println("array2: " + testMap.get("array2"));
+				System.out.println(rowTaskName + " has a value of: " + valueOfRowInHoursWorked);
+				subtractHourList.add(strHoursWorked);
+				
+				String lastRowNumber = db.getLastRowNumber();
+				String lastRowName = db.getLastRowUserName();
+				db.updateTasknameIntoEventlog(rowTaskName);
+//				String lastTaskname = db.getLastTaskname(); // need to insert username somehow before querying it
+				
+				
+				String lastRowYear = db.getLastRowYear();
+				String lastRowMonth = db.getLastRowMonth();
+				String lastRowDay = db.getLastRowDay();
+				
+				
+//				
+////				if (rowTaskName.equals(lastRowName) && mondayDay.equals(day) && mondayMonth.equals(month) && mondayYear.equals(year)) {
+////					System.out.println("wow, they're the same");
+////				} else {
+////					System.out.println("they ain't the same");
+////				}
+//				
+////				db.addUserTask(lastRowName);
+//				db.updateLastAddedTask(year, month, day);
+				
+				
+				//if entered info = last info , then do not add another row! last username, date, and taskname match, then do not add another row
+				 
+				
 				hourNumber.setText(strHoursWorked);
 				
+				db.updateTaskDuration(valueOfRowInHoursWorked);
+				String lastRowDuration = db.getLastRowDuration();
+				
+				//make new record 
+				
+				//insert rowName into userTable. then valueOfRowInHoursWorked into duration
+				//submit button: get names of all the tasks today, loop through that. then get all the values of all those tasks. then submit them all into database at current date
+				System.out.println("Last row: " + lastRowNumber + " \nName: " + lastRowName + " \nDuration: " + lastRowDuration + 
+						" \nDate: "+ lastRowMonth + "-" + lastRowDay + "-" + lastRowYear + "\n==========");
 			}
 		}); 
 		
@@ -195,6 +249,8 @@ public class TaskEnterActivity extends Activity {
 			public void onClick(View v) {
 				hoursWorked-=.5;
 				String strHoursWorked = String.valueOf(hoursWorked);
+				String rowName = (String) child.getText();
+				System.out.println("Row name: " + rowName);
 				System.out.println(strHoursWorked);
 				hourNumber.setText(strHoursWorked);
 //				addTaskLV.setOnItemClickListener(new OnItemClickListener() {
@@ -214,7 +270,7 @@ public class TaskEnterActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				hoursWorked+=.5;
-				String strHoursWorked = String.valueOf(hoursWorked);
+				
 				System.out.println(strHoursWorked);
 				hourNumber.setText(strHoursWorked);
 			}

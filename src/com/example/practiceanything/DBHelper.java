@@ -30,7 +30,7 @@ public class DBHelper extends SQLiteOpenHelper {
 	private static final String COLUMN_DAY = "day";
 	private static final String TABLE_USERS_CREATE = "create table if not exists users('_id' integer primary key autoincrement, firstname text);";
 	private static final String TABLE_EVENTLOG_CREATE = "create table if not exists eventlog2('_id' integer primary key autoincrement, taskname text, duration int, name text, year text, month text," +
-			"day text);";
+			"day text);"; //duration is int because i want to add up the values over time
 	private static final String TABLE_USERS_PERSONALEVENTS_CREATE = "create table if not exists usersevents('_id' integer primary key autoincrement, taskname text);"; 
 				//constructor
 	public DBHelper(Context context) {
@@ -131,6 +131,8 @@ public class DBHelper extends SQLiteOpenHelper {
 		
 	}
 	
+	
+	
 	public void updateLastAddedTask(String year, String month, String day){
 		SQLiteDatabase db = this.getWritableDatabase();
 		Cursor c = db.rawQuery("select * from eventlog2;", null);
@@ -156,6 +158,17 @@ public class DBHelper extends SQLiteOpenHelper {
 		db.close();
 	}
 	
+	public String getLastRowNumber() {
+		SQLiteDatabase db = this.getWritableDatabase();
+		
+		Cursor c = db.rawQuery("select * from eventlog2;", null);
+		c.moveToLast();
+		int rowNum = c.getInt(0);
+		final String lastRowNumber = String.valueOf(rowNum);
+		System.out.println("Last row: " + lastRowNumber);
+		return lastRowNumber;
+	}
+	
 	public String getLastRowUserName() {
 		SQLiteDatabase db = this.getWritableDatabase();
 		String lastUsername = null;
@@ -169,11 +182,116 @@ public class DBHelper extends SQLiteOpenHelper {
 		return lastUsername;
 		}
 	
+	public String getLastRowDuration() {
+		SQLiteDatabase db = this.getWritableDatabase();
+		String lastDuration = null;
+		Cursor cc = db.rawQuery("select * from eventlog2;", null);
+			
+			if (cc!=null) {
+				cc.moveToLast();
+				lastDuration = String.valueOf(cc.getInt(2)); 
+				System.out.println(lastDuration);
+			}
+		return lastDuration;		
+	}
+	
+	public String getLastTaskname() {
+		SQLiteDatabase db = this.getWritableDatabase();
+		String lastTaskname = null;
+		Cursor c = db.rawQuery("select * from eventlog2;", null);
+			
+			if (c!=null) {
+				c.moveToLast();
+				lastTaskname = c.getString(1).toString();
+				System.out.println(lastTaskname);
+			}
+		return lastTaskname;
+	}
+	
+	public String getLastRowYear() {
+		SQLiteDatabase db = this.getWritableDatabase();
+		String lastRowYear = null;
+		Cursor c = db.rawQuery("select * from eventlog2;", null);
+			
+			if (c!=null) {
+				c.moveToLast();
+				lastRowYear = c.getString(4).toString();
+				System.out.println(lastRowYear);
+			}
+		return lastRowYear;
+		}
+	
+
+	public String getLastRowMonth() {
+		SQLiteDatabase db = this.getWritableDatabase();
+		String lastRowMonth = null;
+		Cursor c = db.rawQuery("select * from eventlog2;", null);
+			
+			if (c!=null) {
+				c.moveToLast();
+				lastRowMonth = c.getString(5).toString();
+				System.out.println(lastRowMonth);
+			}
+		return lastRowMonth;
+		}
+	
+	
+	public String getLastRowDay() {
+		SQLiteDatabase db = this.getWritableDatabase();
+		String lastRowDay = null;
+		Cursor c = db.rawQuery("select * from eventlog2;", null);
+			
+			if (c!=null) {
+				c.moveToLast();
+				lastRowDay = c.getString(6).toString();
+				System.out.println(lastRowDay);
+			}
+		return lastRowDay;
+		}
+	
+	
 	public void createPersonalizedTask(String taskname) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
 		values.put(COLUMN_TASKNAME, taskname);
 		db.insert(TABLE_USERS_PERSONALEVENTS_CREATE, COLUMN_TASKNAME, values);
+	}
+	
+	public void updateTaskDuration(String duration) {
+		SQLiteDatabase db = this.getWritableDatabase();
+		Cursor c = db.rawQuery("select * from eventlog2;", null);
+		c.moveToLast();
+		int rowNum = c.getInt(0);
+		final String lastRowId = String.valueOf(rowNum);
+		
+		ContentValues values = new ContentValues();
+		values.put(COLUMN_DURATION, duration);
+		db.update(TABLE_EVENTLOG, values, KEY_ID + " = " + lastRowId, null);
+//		
+		Cursor cc = db.rawQuery("select * from eventlog2;", null);
+		cc.moveToLast();
+		int rowNum2 = cc.getInt(0);
+		final String lastRowId2 = String.valueOf(rowNum2);
+		String durationPrint = cc.getString(2).toString();
+		System.out.println("Row: " + lastRowId2 + " Duration: " + durationPrint);
+		db.close();
+		
+		//need to duplicate last record's info then create a new record
+		
+	}
+	
+	public void updateTasknameIntoEventlog(String taskname) {
+		SQLiteDatabase db = this.getWritableDatabase();
+		ContentValues values = new ContentValues();
+		
+		Cursor c = db.rawQuery("select * from eventlog2;", null);
+		c.moveToLast();
+		int rowNum = c.getInt(0);
+		final String lastRowId = String.valueOf(rowNum);
+		
+		values.put(COLUMN_TASKNAME, taskname);
+		db.update(TABLE_EVENTLOG, values, KEY_ID + " = " + lastRowId, null);
+		db.close();
 	}
 	
 }
