@@ -3,6 +3,7 @@ package com.example.practiceanything;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import android.app.Activity;
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -25,18 +27,19 @@ public class TaskEnterActivity extends Activity {
 	Map<String, String> testMap = new HashMap();
 	String strHoursWorked = String.valueOf(hoursWorked);
 	DBHelper db = new DBHelper(this);
-	
+
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_task_enter);
-		
+		testMap.put("yes", "no");
 		final TextView tv = (TextView)findViewById(R.id.dayMod);
 		final TextView tv2 = new TextView(getBaseContext());
 		
 		final Button addTaskbtn = (Button)findViewById(R.id.addTask);
 		final Button lessHoursbtn = (Button)findViewById(R.id.lessHours);
+		final Button submitTasksbtn = (Button)findViewById(R.id.submitTasks);
 		
 		final RelativeLayout enterTaskRL = (RelativeLayout)findViewById(R.id.activityTaskEnterRL);
 		final LinearLayout enterTaskLL = (LinearLayout)findViewById(R.id.activityEnterTaskEnterMainLL);
@@ -64,7 +67,7 @@ public class TaskEnterActivity extends Activity {
 		testList.addAll(Arrays.asList(otherList));
 		
 		testList.add("work");
-		ArrayAdapter<String> aa = new ArrayAdapter<String>(this, R.layout.taskview, R.id.taskName, testList);
+		final ArrayAdapter<String> aa = new ArrayAdapter<String>(this, R.layout.taskview, R.id.taskName, testList);
 		addTaskLV.setAdapter(aa);
 		
 		addTaskLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -120,15 +123,58 @@ public class TaskEnterActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				
+				testMap.put("yes", "no");
+			
 				
 			}
 		});
 		
-
+		submitTasksbtn.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				int listNumber = aa.getCount();
+				String listCount = String.valueOf(listNumber);
+				System.out.println(listCount);
+//				printMap(testMap);
+				
+			    View v2;
+			    TextView tv;
+			    TextView tv2;
+			    LinearLayout lv;
+			    
+			    LinearLayout addNoteLayout = (LinearLayout) findViewById(R.id.pleaseWorkLL);
+			    
+			    int index = ((ViewGroup) addNoteLayout.getParent()).indexOfChild(addNoteLayout);
+			    int listViewCount = addTaskLV.getCount();
+			    
+			    View something = addTaskLV.getChildAt(index);
+			    
+			    LinearLayout pleasework = (LinearLayout)something;
+			    int childcount = pleasework.getChildCount();
+			    
+			    System.out.println("Index count: " + String.valueOf(index));
+			    System.out.println("Childview count: " + String.valueOf(childcount));
+			    System.out.println("Listview count of items: " + String.valueOf(listViewCount));
+////			    for (int i = 0; i < aa.getCount(); i++) {
+//			        v2 = aa.getView(0, null, null);
+//			        lv = (LinearLayout) v2;
+//			        tv = (TextView) lv.getChildAt(1);
+//			        
+////			        tv = (TextView) v2;
+//			        String taskname = (String) tv.getText();
+////			    tv2 = (TextView) v.findViewById(i);
+//			        
+////			        System.out.println(taskname);
+////			        testMap.put(taskname, "fluff");
+////			    }
+////			    printMap(testMap);
+//			}
+//		});
 		
 	}
-
+		});
+		}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -142,14 +188,14 @@ public class TaskEnterActivity extends Activity {
 		 
 		
         final LinearLayout vwParentRow = (LinearLayout)v.getParent();
-         
+         int vwChildCount = vwParentRow.getChildCount();
         final TextView child = (TextView)vwParentRow.getChildAt(0);
         final TextView hourNumber = (TextView)vwParentRow.getChildAt(2);
         
         final Button subtractBtnChild = (Button)vwParentRow.getChildAt(1);
         final Button addBtnChild = (Button)vwParentRow.getChildAt(3);
         
-        
+        System.out.println("Selected list item child count: " + String.valueOf(vwChildCount));
 //        btnChild.setText(hourNumber.getText());
         
         
@@ -207,8 +253,12 @@ public class TaskEnterActivity extends Activity {
 				
 				//insert rowName into userTable. then valueOfRowInHoursWorked into duration
 				//submit button: get names of all the tasks today, loop through that. then get all the values of all those tasks. then submit them all into database at current date
-				System.out.println("Last row: " + lastRowNumber + " \nName: " + lastRowName + " \nDuration: " + lastRowDuration + 
-						" \nDate: "+ lastRowMonth + "-" + lastRowDay + "-" + lastRowYear + "\n==========");
+				System.out.println(
+						"Last row: " + lastRowNumber + 
+						" \nName: " + lastRowName + 
+						" \nDuration: " + lastRowDuration + 
+						" \nDate: "+ lastRowMonth + "-" + lastRowDay + "-" + lastRowYear + 
+						"\n==========");
 			}
 		}); 
 		
@@ -282,4 +332,18 @@ public class TaskEnterActivity extends Activity {
         vwParentRow.refreshDrawableState(); 		
 	}
 	
+	public static void printMap(Map mp) {
+	    Iterator it = mp.entrySet().iterator();
+	    
+	    if (mp.isEmpty()) {
+	    	System.out.println("Map is empty.");
+	    }
+	    while (it.hasNext()) {
+	        Map.Entry pairs = (Map.Entry)it.next();
+	        System.out.println(pairs.getKey() + " = " + pairs.getValue());
+	        it.remove(); // avoids a ConcurrentModificationException
+	    }
+	}
+	
 }
+	
