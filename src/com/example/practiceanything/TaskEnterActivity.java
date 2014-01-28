@@ -145,9 +145,16 @@ public class TaskEnterActivity extends Activity {
 			    
 			    LinearLayout addNoteLayout = (LinearLayout) findViewById(R.id.pleaseWorkLL);
 			    
+			   
+			    TextView textViewHopefully = (TextView) addNoteLayout.getChildAt(0);
+			    System.out.println("Textview listed: " + textViewHopefully.getText().toString());
 			    int index = ((ViewGroup) addNoteLayout.getParent()).indexOfChild(addNoteLayout);
-			    int listViewCount = addTaskLV.getCount();
+			    int listViewCount = addNoteLayout.getChildCount();
 			    
+			    LinearLayout i = (LinearLayout) addTaskLV.getChildAt(addTaskLV.getFirstVisiblePosition() + 1);
+			    TextView secondRow = (TextView)i.findViewById(R.id.taskName);
+			    System.out.println("Second row listed: " + secondRow.getText().toString());
+
 			    View something = addTaskLV.getChildAt(index);
 			    
 			    LinearLayout pleasework = (LinearLayout)something;
@@ -155,7 +162,7 @@ public class TaskEnterActivity extends Activity {
 			    
 			    System.out.println("Index count: " + String.valueOf(index));
 			    System.out.println("Childview count: " + String.valueOf(childcount));
-			    System.out.println("Listview count of items: " + String.valueOf(listViewCount));
+			    System.out.println("Listview childcount of items: " + String.valueOf(listViewCount));
 ////			    for (int i = 0; i < aa.getCount(); i++) {
 //			        v2 = aa.getView(0, null, null);
 //			        lv = (LinearLayout) v2;
