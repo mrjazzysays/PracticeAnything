@@ -33,7 +33,7 @@ public class TaskEnterActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_task_enter);
-		testMap.put("yes", "no");
+		
 		final TextView tv = (TextView)findViewById(R.id.dayMod);
 		final TextView tv2 = new TextView(getBaseContext());
 		
@@ -43,24 +43,59 @@ public class TaskEnterActivity extends Activity {
 		
 		final RelativeLayout enterTaskRL = (RelativeLayout)findViewById(R.id.activityTaskEnterRL);
 		final LinearLayout enterTaskLL = (LinearLayout)findViewById(R.id.activityEnterTaskEnterMainLL);
-//		final LinearLayout addTaskLL = new LinearLayout(getBaseContext());
 		final ListView addTaskLV = (ListView)findViewById(R.id.addTaskList);
-		
-//		LayoutInflater inflator = LayoutInflater.from(getBaseContext());
-//		View v = inflator.inflate(R.layout.taskview, null);
-//		enterTaskLL.addView(v);
 		
 		Intent intent = getIntent();
 		final String lastRowName = intent.getExtras().getString("lastRowName");
 		final String scheduleFor = lastRowName + "'s Schedule For ";
+		
 		final String mondayMod = intent.getExtras().getString("mondayMod");
 		final String tuesdayMod = intent.getExtras().getString("tuesdayMod");
+		final String wednesdayMod = intent.getExtras().getString("wednesdayMod");
+		final String thursdayMod = intent.getExtras().getString("thursdayMod");
+		final String fridayMod = intent.getExtras().getString("fridayMod");
+		final String saturdayMod = intent.getExtras().getString("saturdayMod");
+		final String sundayMod = intent.getExtras().getString("sundayMod");
 		
 		final String mondayDay = intent.getExtras().getString("mondayDay");
+		final String tuesdayDay = intent.getExtras().getString("tuesdayDay");
+		final String wednesdayDay = intent.getExtras().getString("wednesdayDay");
+		final String thursdayDay = intent.getExtras().getString("thursdayDay");
+		final String fridayDay = intent.getExtras().getString("fridayDay");
+		final String saturdayDay = intent.getExtras().getString("saturdayDay");
+		final String sundayDay = intent.getExtras().getString("sundayDay");
 		
 		final String mondayMonth = intent.getExtras().getString("mondayMonth");
+		final String tuesdayMonth = intent.getExtras().getString("tuesdayMonth");
+		final String wednesdayMonth = intent.getExtras().getString("wednesdayMonth");
+		final String thursdayMonth = intent.getExtras().getString("thursdayMonth");
+		final String fridayMonth = intent.getExtras().getString("fridayMonth");
+		final String saturdayMonth = intent.getExtras().getString("saturdayMonth");
+		final String sundayMonth = intent.getExtras().getString("fridayMonth");
 		
 		final String mondayYear = intent.getExtras().getString("mondayYear");
+		final String tuesdayYear = intent.getExtras().getString("tuesdayYear");
+		final String wednesdayYear = intent.getExtras().getString("wednesdayYear");
+		final String thursdayYear = intent.getExtras().getString("thursdayYear");
+		final String fridayYear = intent.getExtras().getString("fridayYear");
+		final String saturdayYear = intent.getExtras().getString("saturdayYear");
+		final String sundayYear = intent.getExtras().getString("sundayYear");
+		
+		
+		if (mondayMod!=null) {
+			tv.setText(scheduleFor + "Monday, " + mondayMonth +"-" + mondayDay + "-" + mondayYear);
+			final String year = mondayYear;
+			final String month = mondayMonth;
+			final String day = mondayDay;
+			} else {
+			System.out.println("mondayMod has NOTHING");
+			}
+		
+		if (tuesdayMod!=null) {
+			System.out.println("tuesdayMod has stuff in it");
+		} else {
+			System.out.println("tuesdayMod has NOTHING");
+		} 
 		
 		ArrayList<String> testList = new ArrayList<String>();
 		String[] otherList = {"array1","array2"};
@@ -107,17 +142,7 @@ public class TaskEnterActivity extends Activity {
 		
 
 		
-		if (mondayMod!=null) {
-			tv.setText(scheduleFor + "Monday, " + mondayMonth +"-" + mondayDay + "-" + mondayYear);
-			} else {
-			System.out.println("mondayMod has NOTHING");
-			}
-		
-		if (tuesdayMod!=null) {
-			System.out.println("tuesdayMod has stuff in it");
-		} else {
-			System.out.println("tuesdayMod has NOTHING");
-		}
+
 		
 		addTaskbtn.setOnClickListener(new OnClickListener() {
 			
@@ -133,52 +158,48 @@ public class TaskEnterActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
+			    LinearLayout addNoteLayout = (LinearLayout) findViewById(R.id.pleaseWorkLL);
+			    TextView textViewHopefully = (TextView) addNoteLayout.getChildAt(0);
+			    String currentDay =  tv.getText().toString();
+			    String[] splitString = currentDay.split(" ");
+			    String datePart = splitString[4];
+			    String[] splitDate = datePart.split("-");
+			    
+			    String monthPart = splitDate[0];
+			    String dayPart = splitDate[1];
+			    String yearPart = splitDate[2];		
+			    System.out.println("Current day is: " + currentDay + ", Date is: " + datePart + "\n" + 
+			    		"Month: " + monthPart + " Day: " + dayPart + " Year: " + yearPart
+			    		);
+			    
 				int listNumber = aa.getCount();
-				String listCount = String.valueOf(listNumber);
+			    int listViewCount = addNoteLayout.getChildCount();
+			    int positionInList = addTaskLV.getFirstVisiblePosition();
+			    int listViewChildCount = addTaskLV.getChildCount();
+				
+			    String listCount = String.valueOf(listNumber);
+			    
 				System.out.println(listCount);
 //				printMap(testMap);
-				
-			    View v2;
-			    TextView tv;
-			    TextView tv2;
-			    LinearLayout lv;
-			    
-			    LinearLayout addNoteLayout = (LinearLayout) findViewById(R.id.pleaseWorkLL);
-			    
-			   
-			    TextView textViewHopefully = (TextView) addNoteLayout.getChildAt(0);
+						    
 			    System.out.println("Textview listed: " + textViewHopefully.getText().toString());
-			    int index = ((ViewGroup) addNoteLayout.getParent()).indexOfChild(addNoteLayout);
-			    int listViewCount = addNoteLayout.getChildCount();
 			    
-			    LinearLayout i = (LinearLayout) addTaskLV.getChildAt(addTaskLV.getFirstVisiblePosition() + 1);
-			    TextView secondRow = (TextView)i.findViewById(R.id.taskName);
-			    System.out.println("Second row listed: " + secondRow.getText().toString());
-
-			    View something = addTaskLV.getChildAt(index);
+			    for (int i=0; i<listViewChildCount;i++) {
+				    LinearLayout LL = (LinearLayout) addTaskLV.getChildAt(positionInList + i);
+				    TextView nextRow = (TextView)LL.findViewById(R.id.taskName);
+				    TextView hourNumber = (TextView)LL.findViewById(R.id.hourNumber);
+				    String taskname = nextRow.getText().toString();
+				    String hourAmount = hourNumber.getText().toString();
+				    float duration = Float.parseFloat(hourAmount);
+				    System.out.println("Row " + i + ": " + taskname + " // Hours: " + hourAmount);
+				    testMap.put(taskname, hourAmount);
+				    db.insertCompleteTasknameIntoEventlog(taskname, duration, lastRowName, yearPart, monthPart, dayPart);
+			    }
 			    
-			    LinearLayout pleasework = (LinearLayout)something;
-			    int childcount = pleasework.getChildCount();
 			    
-			    System.out.println("Index count: " + String.valueOf(index));
-			    System.out.println("Childview count: " + String.valueOf(childcount));
-			    System.out.println("Listview childcount of items: " + String.valueOf(listViewCount));
-////			    for (int i = 0; i < aa.getCount(); i++) {
-//			        v2 = aa.getView(0, null, null);
-//			        lv = (LinearLayout) v2;
-//			        tv = (TextView) lv.getChildAt(1);
-//			        
-////			        tv = (TextView) v2;
-//			        String taskname = (String) tv.getText();
-////			    tv2 = (TextView) v.findViewById(i);
-//			        
-////			        System.out.println(taskname);
-////			        testMap.put(taskname, "fluff");
-////			    }
-////			    printMap(testMap);
-//			}
-//		});
-		
+			    printMap(testMap);
+			    
+			    System.out.println("Listview layout childcount of items: " + String.valueOf(listViewCount));
 	}
 		});
 		}

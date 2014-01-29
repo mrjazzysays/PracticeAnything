@@ -29,7 +29,7 @@ public class DBHelper extends SQLiteOpenHelper {
 	private static final String COLUMN_MONTH = "month";
 	private static final String COLUMN_DAY = "day";
 	private static final String TABLE_USERS_CREATE = "create table if not exists users('_id' integer primary key autoincrement, firstname text);";
-	private static final String TABLE_EVENTLOG_CREATE = "create table if not exists eventlog2('_id' integer primary key autoincrement, taskname text, duration int, name text, year text, month text," +
+	private static final String TABLE_EVENTLOG_CREATE = "create table if not exists eventlog2('_id' integer primary key autoincrement, taskname text, duration real, name text, year text, month text," +
 			"day text);"; //duration is int because i want to add up the values over time
 	private static final String TABLE_USERS_PERSONALEVENTS_CREATE = "create table if not exists usersevents('_id' integer primary key autoincrement, taskname text);"; 
 				//constructor
@@ -189,7 +189,7 @@ public class DBHelper extends SQLiteOpenHelper {
 			
 			if (cc!=null) {
 				cc.moveToLast();
-				lastDuration = String.valueOf(cc.getInt(2)); 
+				lastDuration = String.valueOf(cc.getFloat(2)); 
 				System.out.println(lastDuration);
 			}
 		return lastDuration;		
@@ -292,6 +292,32 @@ public class DBHelper extends SQLiteOpenHelper {
 		values.put(COLUMN_TASKNAME, taskname);
 		db.update(TABLE_EVENTLOG, values, KEY_ID + " = " + lastRowId, null);
 		db.close();
+	}
+	
+	public void insertCompleteTasknameIntoEventlog(String taskname, float duration, String name, String year, String month, String day) {
+		SQLiteDatabase db = this.getWritableDatabase();
+		ContentValues values = new ContentValues();
+		values.put(COLUMN_TASKNAME, taskname);
+		values.put(COLUMN_DURATION, duration);
+		values.put(COLUMN_NAME, name);
+		values.put(COLUMN_YEAR, year);
+		values.put(COLUMN_MONTH, month);
+		values.put(COLUMN_DAY, day);
+		db.insert(TABLE_EVENTLOG, COLUMN_TASKNAME, values);
+		
+		Cursor cc = db.rawQuery("select * from eventlog2;", null);
+		cc.moveToLast();
+		int rowNum2 = cc.getInt(0);
+		final String lastRowId2 = String.valueOf(rowNum2);
+		String tasknamePrint = cc.getString(1).toString();
+		float durationFloat = cc.getFloat(2);
+		String durationPrint = String.valueOf(durationFloat);
+		String namePrint = cc.getString(3).toString();
+		String yearPrint = cc.getString(4).toString();
+		String monthPrint = cc.getString(5).toString();
+		String dayPrint = cc.getString(6).toString();
+		System.out.println("====\nDB Row: " + lastRowId2 + " \nTaskname: " + tasknamePrint + " \nDuration: " + durationPrint + " \nName: " + namePrint + 
+				"\nYear: " + yearPrint + " Month: " + monthPrint + " Day: " + dayPrint + "\n====");
 	}
 	
 }

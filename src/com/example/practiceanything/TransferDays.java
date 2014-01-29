@@ -19,5 +19,10 @@ public class TransferDays {
 	public String getYearOnlyInfo(String year) {
 		String formattedYearOnly = Character.toString(year.charAt(10)) +  Character.toString(year.charAt(11)) +  Character.toString(year.charAt(12)) +  Character.toString(year.charAt(13));
 		return formattedYearOnly;
+	
+	
+		
 	}
+	
+	
 }
