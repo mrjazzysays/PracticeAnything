@@ -122,24 +122,7 @@ public class TaskEnterActivity extends Activity {
 		});
 		
 
-		
-//		lessHoursbtn.setOnClickListener(new OnClickListener() {
-//			
-//			@Override
-//			public void onClick(View v) {
-//				System.out.println("-");
-//				
-//			}
-//		});	
-//		TaskView taskview = new TaskView(this);
-//		taskview.addButtonToLinearLayout(enterTaskLL);
-//		taskview.addSubButtonToLinearLayout(enterTaskLL);
-//		taskview.addLinearLayoutToLinearLayout(enterTaskLL, "New DNA Isolation",1);
-//		List<String> list = new List[]();
-//		taskview.addLinearLayoutToLinearLayout(enterTaskLL, "Accessioning",2);
-		
-//		View populatesaddTaskLV = LayoutInflater.from(getBaseContext()).inflate(R.layout.taskview, null);
-//		enterTaskLL.addView(populatesaddTaskLV);
+
 		
 		
 

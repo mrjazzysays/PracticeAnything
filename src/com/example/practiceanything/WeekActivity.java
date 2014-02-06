@@ -1,5 +1,6 @@
 package com.example.practiceanything;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -29,7 +30,8 @@ public class WeekActivity extends Activity {
 		TextView tv = (TextView)findViewById(R.id.listWeek);
 		
 		final ListView lv = (ListView)findViewById(R.id.addTaskList);
-				
+		final ListView mondayListview = (ListView)findViewById(R.id.mondayList);
+		
 		final EditText et = (EditText)findViewById(R.id.editText1);
 		final EditText et2 = (EditText)findViewById(R.id.editText2);
 		
@@ -47,6 +49,14 @@ public class WeekActivity extends Activity {
 			
 		final ArrayAdapter<String> aa = new ArrayAdapter<String>(this, R.layout.simple_list_item, userList);
 		lv.setAdapter(aa);
+		
+		final List<String> mondayList = db.getFullRecordsFromEventLog("jeff", "2014", "01", "13");
+		final List<String> testListt = new ArrayList<String>();
+		testListt.add("testing");
+		
+		final ArrayAdapter<String> mondayAA = new ArrayAdapter<String>(this, R.layout.weekview_list_item, mondayList);
+		mondayListview.setAdapter(mondayAA);
+		
 		
 		Intent intent = getIntent();
 		String listweek = intent.getExtras().getString("listweek");

@@ -111,7 +111,11 @@ public class DBHelper extends SQLiteOpenHelper {
 			int cursorCount = cc.getCount();
 			System.out.println("# of rows in cursor: " + String.valueOf(cursorCount));
 			cc.moveToFirst();
-
+			
+			if (cc.getCount()==0){
+				recordList.add("No Data Entered");
+			}
+			
 			for (int i = 0;i<cursorCount;i++){
 
 				int rowNum2 = cc.getInt(0);
@@ -123,16 +127,17 @@ public class DBHelper extends SQLiteOpenHelper {
 				String yearPrint = cc.getString(4).toString();
 				String monthPrint = cc.getString(5).toString();
 				String dayPrint = cc.getString(6).toString();
-				String listFullTaskNameAndDuration = tasknamePrint + durationPrint;
+				String listFullTaskNameAndDuration = tasknamePrint + " \t " + durationPrint;
 				System.out.println("====\nDB Row: " + lastRowId2 +" \nTaskname: " + tasknamePrint +" \nDuration: " + durationPrint +  " \nName: " +  namePrint + 
 						"\nYear: " + yearPrint + " Month: " + monthPrint + " Day: " + dayPrint + "\n====");
 				cc.moveToNext();
 				recordList.add(listFullTaskNameAndDuration);
 			}
-			return recordList;
+			
 		}
 		else {
 			System.out.println("Fail. No records found");
+			recordList.add("No Data Entered");
 		}
 		return recordList;
 	}
