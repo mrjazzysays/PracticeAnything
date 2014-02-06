@@ -99,6 +99,44 @@ public class DBHelper extends SQLiteOpenHelper {
 		return userList;
 	}
 	
+	public final List<String> getFullRecordsFromEventLog(String name, String year, String month, String day) {
+		final List<String> recordList = new ArrayList<String>();
+		SQLiteDatabase db = this.getWritableDatabase();
+		Cursor cc = db.rawQuery("select * from eventlog2 where name = " + "'"+name+"'" 
+		+ "AND taskname is not null " +
+		"AND year = " + "'"+year+"'" + " AND month = " + "'"+month+"'" + " AND day = " + "'"+day+"'" + ";", null);
+		
+				 
+		if (cc!=null) {
+			int cursorCount = cc.getCount();
+			System.out.println("# of rows in cursor: " + String.valueOf(cursorCount));
+			cc.moveToFirst();
+
+			for (int i = 0;i<cursorCount;i++){
+
+				int rowNum2 = cc.getInt(0);
+				final String lastRowId2 = String.valueOf(rowNum2);
+				float durationFloat = cc.getFloat(2);
+				String tasknamePrint = cc.getString(1).toString();
+				String durationPrint = String.valueOf(durationFloat);
+				String namePrint = cc.getString(3).toString();
+				String yearPrint = cc.getString(4).toString();
+				String monthPrint = cc.getString(5).toString();
+				String dayPrint = cc.getString(6).toString();
+				String listFullTaskNameAndDuration = tasknamePrint + durationPrint;
+				System.out.println("====\nDB Row: " + lastRowId2 +" \nTaskname: " + tasknamePrint +" \nDuration: " + durationPrint +  " \nName: " +  namePrint + 
+						"\nYear: " + yearPrint + " Month: " + monthPrint + " Day: " + dayPrint + "\n====");
+				cc.moveToNext();
+				recordList.add(listFullTaskNameAndDuration);
+			}
+			return recordList;
+		}
+		else {
+			System.out.println("Fail. No records found");
+		}
+		return recordList;
+	}
+	
 	public void deleteUser(String username) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.delete(TABLE_USERS, COLUMN_FIRSTNAME + "= ?", new String[]{username});
@@ -319,5 +357,13 @@ public class DBHelper extends SQLiteOpenHelper {
 		System.out.println("====\nDB Row: " + lastRowId2 + " \nTaskname: " + tasknamePrint + " \nDuration: " + durationPrint + " \nName: " + namePrint + 
 				"\nYear: " + yearPrint + " Month: " + monthPrint + " Day: " + dayPrint + "\n====");
 	}
+	
+	public void deleteEmptyRecordsFromEventlog() { 
+		SQLiteDatabase db = this.getWritableDatabase();
+	}
+	
+
+	
+
 	
 }

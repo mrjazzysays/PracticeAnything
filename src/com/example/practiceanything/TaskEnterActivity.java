@@ -34,6 +34,8 @@ public class TaskEnterActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_task_enter);
 		
+		db.getFullRecordsFromEventLog("jeff", "1", "1", "1");
+		
 		final TextView tv = (TextView)findViewById(R.id.dayMod);
 		final TextView tv2 = new TextView(getBaseContext());
 		
