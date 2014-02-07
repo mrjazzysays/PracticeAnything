@@ -94,16 +94,48 @@ public class TaskEnterActivity extends Activity {
 			}
 		
 		if (tuesdayMod!=null) {
-			System.out.println("tuesdayMod has stuff in it");
+			tv.setText(scheduleFor + "Tuesday, " + tuesdayMonth +"-" + tuesdayDay + "-" + tuesdayYear);
 		} else {
 			System.out.println("tuesdayMod has NOTHING");
 		} 
+		
+		if (wednesdayMod!=null) {
+			tv.setText(scheduleFor + "Wednesday, " + wednesdayMonth +"-" + wednesdayDay + "-" + wednesdayYear);
+		} else {
+			System.out.println("wednesdayMod has NOTHING");
+		} 
+		
+		if (thursdayMod!=null) {
+			tv.setText(scheduleFor + "Thursday, " + thursdayMonth +"-" + thursdayDay + "-" + thursdayYear);
+		} else {
+			System.out.println("thursdayMod has NOTHING");
+		} 
+		
+		if (fridayMod!=null) {
+			tv.setText(scheduleFor + "Friday, " + fridayMonth +"-" + fridayDay + "-" + fridayYear);
+		} else {
+			System.out.println("fridayMod has NOTHING");
+		} 
+		
+		if (saturdayMod!=null) {
+			tv.setText(scheduleFor + "Saturday, " + saturdayMonth +"-" + saturdayDay + "-" + saturdayYear);
+		} else {
+			System.out.println("saturdayMod has NOTHING");
+		} 
+		
+		if (sundayMod!=null) {
+			tv.setText(scheduleFor + "Sunday, " + sundayMonth +"-" + sundayDay + "-" + sundayYear);
+		} else {
+			System.out.println("sundayMod has NOTHING");
+		} 
+
+		
 		
 		ArrayList<String> testList = new ArrayList<String>();
 		String[] otherList = {"array1","array2"};
 		testList.addAll(Arrays.asList(otherList));
 		
-		testList.add("work");
+		
 		final ArrayAdapter<String> aa = new ArrayAdapter<String>(this, R.layout.taskview, R.id.taskName, testList);
 		addTaskLV.setAdapter(aa);
 		
@@ -196,8 +228,8 @@ public class TaskEnterActivity extends Activity {
 	}
 
 	public void onSubtractHourClick(View v){
-		System.out.println("-");
-        //get the row the clicked button is in
+		
+        
 		 
 		
         final LinearLayout vwParentRow = (LinearLayout)v.getParent();
@@ -209,7 +241,7 @@ public class TaskEnterActivity extends Activity {
         final Button addBtnChild = (Button)vwParentRow.getChildAt(3);
         
         System.out.println("Selected list item child count: " + String.valueOf(vwChildCount));
-//        btnChild.setText(hourNumber.getText());
+        
         
         
         subtractBtnChild.setOnClickListener(new OnClickListener() {
@@ -235,7 +267,7 @@ public class TaskEnterActivity extends Activity {
 				String lastRowNumber = db.getLastRowNumber();
 				String lastRowName = db.getLastRowUserName();
 				db.updateTasknameIntoEventlog(rowTaskName);
-//				String lastTaskname = db.getLastTaskname(); // need to insert username somehow before querying it
+				
 				
 				
 				String lastRowYear = db.getLastRowYear();
@@ -243,19 +275,7 @@ public class TaskEnterActivity extends Activity {
 				String lastRowDay = db.getLastRowDay();
 				
 				
-//				
-////				if (rowTaskName.equals(lastRowName) && mondayDay.equals(day) && mondayMonth.equals(month) && mondayYear.equals(year)) {
-////					System.out.println("wow, they're the same");
-////				} else {
-////					System.out.println("they ain't the same");
-////				}
-//				
-////				db.addUserTask(lastRowName);
-//				db.updateLastAddedTask(year, month, day);
-				
-				
-				//if entered info = last info , then do not add another row! last username, date, and taskname match, then do not add another row
-				 
+
 				
 				hourNumber.setText(strHoursWorked);
 				
@@ -286,7 +306,7 @@ public class TaskEnterActivity extends Activity {
 			}
 		}); 
         
-        int c = Color.CYAN;
+        int c = Color.DKGRAY;
         
         vwParentRow.setBackgroundColor(c); 
         vwParentRow.refreshDrawableState(); 
@@ -303,7 +323,7 @@ public class TaskEnterActivity extends Activity {
         final Button addBtnChild = (Button)vwParentRow.getChildAt(3);
         
         final ListView addTaskLV = (ListView)findViewById(R.id.addTaskList);
-//        btnChild.setText(hourNumber.getText());
+        
         
         
         subtractBtnChild.setOnClickListener(new OnClickListener() {
@@ -316,15 +336,7 @@ public class TaskEnterActivity extends Activity {
 				System.out.println("Row name: " + rowName);
 				System.out.println(strHoursWorked);
 				hourNumber.setText(strHoursWorked);
-//				addTaskLV.setOnItemClickListener(new OnItemClickListener() {
-//
-//					@Override
-//					public void onItemClick(AdapterView<?> arg0, View arg1,
-//							int arg2, long arg3) {
-//						// TODO Auto-generated method stub
-//
-//					}
-//				});
+
 			}
 		}); 
 		
@@ -339,7 +351,7 @@ public class TaskEnterActivity extends Activity {
 			}
 		}); 
         
-        int c = Color.RED;
+        int c = Color.DKGRAY;
         
         vwParentRow.setBackgroundColor(c); 
         vwParentRow.refreshDrawableState(); 		

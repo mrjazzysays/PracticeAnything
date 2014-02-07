@@ -127,7 +127,7 @@ public class DBHelper extends SQLiteOpenHelper {
 				String yearPrint = cc.getString(4).toString();
 				String monthPrint = cc.getString(5).toString();
 				String dayPrint = cc.getString(6).toString();
-				String listFullTaskNameAndDuration = tasknamePrint + " \t " + durationPrint;
+				String listFullTaskNameAndDuration = tasknamePrint + " \t\t\t " + durationPrint;
 				System.out.println("====\nDB Row: " + lastRowId2 +" \nTaskname: " + tasknamePrint +" \nDuration: " + durationPrint +  " \nName: " +  namePrint + 
 						"\nYear: " + yearPrint + " Month: " + monthPrint + " Day: " + dayPrint + "\n====");
 				cc.moveToNext();
