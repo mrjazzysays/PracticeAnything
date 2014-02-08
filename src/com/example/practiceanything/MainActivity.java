@@ -105,23 +105,28 @@ public class MainActivity extends Activity {
                 final String saturdayYear = td.getYearOnlyInfo(saturday);
                 final String sundayYear = td.getYearOnlyInfo(sunday);
                 
-                final String listweek = "Week Selected: " + monday + " - " + sunday;
+                final String listweek =  monday + " - " + sunday;
                 
 				TextView tv = (TextView)findViewById(R.id.displayDate);
 				TextView tv2 = (TextView)findViewById(R.id.currentDay);
+				TextView tv3 = (TextView)findViewById(R.id.weekSelected);
+				TextView tv4 = (TextView)findViewById(R.id.pleaseSelectDate);
+				
 				String day2 = Integer.toString(dayOfMonth);
 				String year2= Integer.toString(year);
 				String month2 = Integer.toString(month);
 				int firstDayOfWeek = cal.getFirstDayOfWeek();
-				
-				
-
-				
-				
-				tv.setText(month2+" " +day2+ " " +year2);
-				
+								
+//				tv.setText(month2+" " +day2+ " " +year2);
+//				tv.setVisibility(View.VISIBLE);
 				
 				tv2.setText(listweek);
+				tv2.setVisibility(View.VISIBLE);
+				
+				tv3.setVisibility(View.VISIBLE);
+				
+				tv4.setVisibility(View.INVISIBLE);
+				
 				final Intent i = new Intent(MainActivity.this, WeekActivity.class);
 				i.putExtra("listweek", listweek);
 				i.putExtra("mondayMod", mondayMod);

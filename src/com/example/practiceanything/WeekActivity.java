@@ -1,10 +1,12 @@
 package com.example.practiceanything;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -14,6 +16,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,7 +30,8 @@ public class WeekActivity extends Activity {
 		
 		final DBHelper db = new DBHelper(this);
 		
-		TextView tv = (TextView)findViewById(R.id.listWeek);
+		final TextView tv2 = (TextView)findViewById(R.id.listWeek);
+		
 		
 		final ListView lv = (ListView)findViewById(R.id.addTaskList);
 		
@@ -39,9 +43,10 @@ public class WeekActivity extends Activity {
 		final ListView saturdayListview = (ListView)findViewById(R.id.saturdayList);
 		final ListView sundayListview = (ListView)findViewById(R.id.sundayList);
 				
-		final EditText et = (EditText)findViewById(R.id.editText1);
-		final EditText et2 = (EditText)findViewById(R.id.editText2);
+
 		
+		final Button addUserDialog = (Button)findViewById(R.id.addUsersBtn);
+		final Button deleteUserDialog = (Button)findViewById(R.id.deleteUsersBtn);
 		Button deleteUserbtn = (Button)findViewById(R.id.deleteUsername);
 		Button addUserbtn = (Button)findViewById(R.id.addUser);
 		Button mondayBtn = (Button)findViewById(R.id.mondayBtn);
@@ -61,8 +66,9 @@ public class WeekActivity extends Activity {
 		
 		
 		Intent intent = getIntent();
-		String listweek = intent.getExtras().getString("listweek");
-		tv.setText(listweek);
+		final String listweek = intent.getExtras().getString("listweek");
+		
+	
 		
 		final String mondayMod = intent.getExtras().getString("mondayMod");
 		final String tuesdayMod = intent.getExtras().getString("tuesdayMod");
@@ -104,51 +110,92 @@ public class WeekActivity extends Activity {
 		saturdayBtn.setText(saturdayMod);
 		sundayBtn.setText(sundayMod);
 		
-
-		
-		deleteUserbtn.setOnClickListener(new OnClickListener() {
+		addUserDialog.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				final String userDelete = et.getText().toString();
-				Toast.makeText(WeekActivity.this, userDelete, Toast.LENGTH_LONG).show();
-				db.deleteUser(userDelete);
+				AlertDialog.Builder aud = new AlertDialog.Builder(WeekActivity.this);
+				final EditText input = new EditText(WeekActivity.this);
 				
-				aa.clear();
-				final List<String> userList2 = db.getAllUsers();
-				aa.addAll(userList2);
-				//print userList
+				
+				LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+				        LinearLayout.LayoutParams.FILL_PARENT,
+				        LinearLayout.LayoutParams.FILL_PARENT);
+				input.setLayoutParams(lp);
+				aud.setTitle("Enter new username:");
+				aud.setView(input);
+				aud.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						final String userAdd = input.getText().toString();
+						Toast.makeText(WeekActivity.this, "User added: " + userAdd, Toast.LENGTH_LONG).show();
+						db.addUser(userAdd);
+						aa.clear();
+						final List<String> userList2 = db.getAllUsers();
+						aa.addAll(userList2);
 
-				db.getAllUsers();
+						
+						db.getAllUsers();
+						
+						
+					}
+				});
+				aud.show();
+				
+				
 			}
 		});
 		
-		addUserbtn.setOnClickListener(new OnClickListener() {
+		deleteUserDialog.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				final String userAdd = et2.getText().toString();
-				Toast.makeText(WeekActivity.this, userAdd, Toast.LENGTH_LONG).show();
-				db.addUser(userAdd);
-				aa.clear();
-				final List<String> userList2 = db.getAllUsers();
-				aa.addAll(userList2);
-
+				AlertDialog.Builder aud = new AlertDialog.Builder(WeekActivity.this);
+				final EditText input = new EditText(WeekActivity.this);
+				LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+				        LinearLayout.LayoutParams.FILL_PARENT,
+				        LinearLayout.LayoutParams.FILL_PARENT);
+				input.setLayoutParams(lp);
+				aud.setTitle("Enter username to delete:");
+				aud.setView(input);
 				
-				db.getAllUsers();
+				aud.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						final String userDelete = input.getText().toString();
+						Toast.makeText(WeekActivity.this, "User deleted: " + userDelete, Toast.LENGTH_LONG).show();
+						db.deleteUser(userDelete);
+						
+						aa.clear();
+						final List<String> userList2 = db.getAllUsers();
+						aa.addAll(userList2);
+						//print userList
+
+						db.getAllUsers();
+						
+					}
+				});
+				aud.show();
 			}
 		});
-		
+				
 		lv.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position,
 					long id) {
 				final TextView tv = (TextView)findViewById(R.id.usernameCurrentSchedule);
+				final TextView tv3 = (TextView)findViewById(R.id.selectUserToViewSchedule);
 				tv.setText(((TextView) view).getText() + "'s Schedule");
 				String userSelected =(String) (lv.getItemAtPosition(position));
 				db.addUserTask(userSelected);
 				tv.setVisibility(View.VISIBLE);
+				
+				tv2.setText(listweek);
+				tv2.setVisibility(View.VISIBLE);
+				tv3.setVisibility(View.INVISIBLE);
 				
 				final List<String> mondayList = db.getFullRecordsFromEventLog(userSelected, mondayYear, mondayMonth, mondayDay);
 				final List<String> tuesdayList = db.getFullRecordsFromEventLog(userSelected, tuesdayYear, tuesdayMonth, tuesdayDay);

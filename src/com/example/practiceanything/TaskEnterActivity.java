@@ -148,26 +148,17 @@ public class TaskEnterActivity extends Activity {
 				String itemPosition = String.valueOf(addTaskLV.getItemAtPosition(arg2));
 				System.out.println(itemPosition);
 				testMap.put(itemPosition, strHoursWorked);
-				System.out.println("Really doe: " + testMap.get(itemPosition));
+				
 			}
 		
 		});
-		
-
-
-		
-		
-
-		
-
-		
+				
 		addTaskbtn.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				testMap.put("yes", "no");
-			
-				
+							
 			}
 		});
 		
@@ -220,78 +211,26 @@ public class TaskEnterActivity extends Activity {
 	}
 		});
 		}
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.task_enter, menu);
-		return true;
-	}
+
 
 	public void onSubtractHourClick(View v){
-		
-        
-		 
-		
+				
         final LinearLayout vwParentRow = (LinearLayout)v.getParent();
-         int vwChildCount = vwParentRow.getChildCount();
+
         final TextView child = (TextView)vwParentRow.getChildAt(0);
         final TextView hourNumber = (TextView)vwParentRow.getChildAt(2);
         
         final Button subtractBtnChild = (Button)vwParentRow.getChildAt(1);
         final Button addBtnChild = (Button)vwParentRow.getChildAt(3);
-        
-        System.out.println("Selected list item child count: " + String.valueOf(vwChildCount));
-        
-        
-        
+                
         subtractBtnChild.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				final ArrayList<String> subtractHourList = new ArrayList<String>();
 				hoursWorked-=.5;
-				String rowTaskName = (String) child.getText();
 				String strHoursWorked = String.valueOf(hoursWorked);
-				
-				
-				testMap.put(rowTaskName, strHoursWorked);
-				String valueOfRowInHoursWorked = testMap.get(rowTaskName);
-				
-				System.out.println(strHoursWorked);
-				System.out.println(rowTaskName + " has a value of: " + valueOfRowInHoursWorked);
-				System.out.println("array1: " + testMap.get(rowTaskName));
-				System.out.println("array2: " + testMap.get("array2"));
-				System.out.println(rowTaskName + " has a value of: " + valueOfRowInHoursWorked);
-				subtractHourList.add(strHoursWorked);
-				
-				String lastRowNumber = db.getLastRowNumber();
-				String lastRowName = db.getLastRowUserName();
-				db.updateTasknameIntoEventlog(rowTaskName);
-				
-				
-				
-				String lastRowYear = db.getLastRowYear();
-				String lastRowMonth = db.getLastRowMonth();
-				String lastRowDay = db.getLastRowDay();
-				
-				
-
-				
 				hourNumber.setText(strHoursWorked);
-				
-				db.updateTaskDuration(valueOfRowInHoursWorked);
-				String lastRowDuration = db.getLastRowDuration();
-				
-				//make new record 
-				
-				//insert rowName into userTable. then valueOfRowInHoursWorked into duration
-				//submit button: get names of all the tasks today, loop through that. then get all the values of all those tasks. then submit them all into database at current date
-				System.out.println(
-						"Last row: " + lastRowNumber + 
-						" \nName: " + lastRowName + 
-						" \nDuration: " + lastRowDuration + 
-						" \nDate: "+ lastRowMonth + "-" + lastRowDay + "-" + lastRowYear + 
-						"\n==========");
+
 			}
 		}); 
 		
@@ -301,13 +240,11 @@ public class TaskEnterActivity extends Activity {
 			public void onClick(View v) {
 				hoursWorked+=.5;
 				String strHoursWorked = String.valueOf(hoursWorked);
-				System.out.println(strHoursWorked);
 				hourNumber.setText(strHoursWorked);
 			}
 		}); 
         
         int c = Color.DKGRAY;
-        
         vwParentRow.setBackgroundColor(c); 
         vwParentRow.refreshDrawableState(); 
 	}
@@ -333,8 +270,6 @@ public class TaskEnterActivity extends Activity {
 				hoursWorked-=.5;
 				String strHoursWorked = String.valueOf(hoursWorked);
 				String rowName = (String) child.getText();
-				System.out.println("Row name: " + rowName);
-				System.out.println(strHoursWorked);
 				hourNumber.setText(strHoursWorked);
 
 			}
@@ -345,14 +280,12 @@ public class TaskEnterActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				hoursWorked+=.5;
-				
-				System.out.println(strHoursWorked);
+				String strHoursWorked = String.valueOf(hoursWorked);
 				hourNumber.setText(strHoursWorked);
 			}
 		}); 
         
         int c = Color.DKGRAY;
-        
         vwParentRow.setBackgroundColor(c); 
         vwParentRow.refreshDrawableState(); 		
 	}

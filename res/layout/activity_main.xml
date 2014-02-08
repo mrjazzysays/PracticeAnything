@@ -17,33 +17,53 @@
         android:layout_marginRight="79dp"
         android:layout_marginTop="148dp" />
 
-    <TextView
-        android:id="@+id/displayDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/calendarView1"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="119dp"
-        android:layout_marginTop="61dp"
-        android:text="displayDate" />
-
     <Button
         android:id="@+id/goToWeek"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/displayDate"
-        android:layout_alignBottom="@+id/displayDate"
-        android:layout_alignRight="@+id/calendarView1"
-        android:layout_marginRight="60dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
         android:text="Go To Week" />
+
+    <TextView
+        android:id="@+id/weekSelected"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/goToWeek"
+        android:layout_marginLeft="46dp"
+        android:text="Week Selected:"
+        android:textSize="35sp"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/displayDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/weekSelected"
+        android:layout_marginLeft="46dp"
+        android:text="displayDate"
+        android:visibility="invisible" />
 
     <TextView
         android:id="@+id/currentDay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/goToWeek"
-        android:layout_alignLeft="@+id/displayDate"
-        android:layout_marginBottom="16dp"
-        android:text="currentDay" />
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/displayDate"
+        android:layout_marginLeft="46dp"
+        android:text="currentDay"
+        android:textSize="25sp"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/pleaseSelectDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/weekSelected"
+        android:layout_alignLeft="@+id/weekSelected"
+        android:text="Select A Date To Start"
+        android:textSize="35sp" />
 
 </RelativeLayout>
