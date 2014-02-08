@@ -36,7 +36,7 @@
             android:layout_weight="1"
             android:text="Add"
             style="@drawable/buttonpress"
-            android:background="@drawable/listviewgradient" />
+            android:background="@drawable/buttonpress" />
 
         <Button
             android:id="@+id/deleteUsersBtn"
