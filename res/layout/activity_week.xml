@@ -34,17 +34,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_margin="5dp"
             android:text="Add"
             style="@drawable/buttonpress"
             android:background="@drawable/buttonpress" />
 
         <Button
             android:id="@+id/deleteUsersBtn"
-            style="?android:attr/buttonStyleSmall"
+            style="@drawable/buttonpress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Delete" />
+            android:layout_margin="5dp"
+            android:text="Delete"
+            android:background="@drawable/deletebuttonpress"/>"
     </LinearLayout>
 
     <ListView
@@ -86,14 +89,18 @@
             android:layout_alignBottom="@+id/button3"
             android:layout_toRightOf="@+id/button3"
             android:layout_weight="1"
-            android:text="M" />
+            android:text="M"
+            android:background="@drawable/buttonpress"
+            android:layout_margin="5dp" />
 
         <Button
             android:id="@+id/tuesdayBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="T" />
+            android:text="T"
+            android:background="@drawable/buttonpress"
+            android:layout_margin="5dp" />
 
         <Button
             android:id="@+id/wednesdayBtn"
@@ -103,7 +110,9 @@
             android:layout_alignBottom="@+id/button4"
             android:layout_toRightOf="@+id/button4"
             android:layout_weight="1"
-            android:text="W" />
+            android:text="W"
+            android:background="@drawable/buttonpress"
+            android:layout_margin="5dp" />
 
         <Button
             android:id="@+id/thursdayBtn"
@@ -112,7 +121,9 @@
             android:layout_below="@+id/deleteUsername"
             android:layout_toRightOf="@+id/addTaskList"
             android:layout_weight="1"
-            android:text="Th" />
+            android:text="Th"
+            android:background="@drawable/buttonpress"
+            android:layout_margin="5dp" />
 
         <Button
             android:id="@+id/fridayBtn"
@@ -122,7 +133,9 @@
             android:layout_alignBottom="@+id/button5"
             android:layout_toRightOf="@+id/button5"
             android:layout_weight="1"
-            android:text="F" />
+            android:text="F"
+            android:background="@drawable/buttonpress"
+            android:layout_margin="5dp" />
 
         <Button
             android:id="@+id/saturdayBtn"
@@ -132,14 +145,20 @@
             android:layout_alignBottom="@+id/button6"
             android:layout_toRightOf="@+id/button6"
             android:layout_weight="1"
-            android:text="Sa" />
+            android:text="Sa"
+            android:background="@drawable/buttonpress"
+            android:layout_margin="5dp" />
 
         <Button
             android:id="@+id/sundayBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Su" />
+            android:text="Su"
+            android:background="@drawable/buttonpress"
+            android:layout_margin="5dp"
+            
+             />
     </LinearLayout>
 
     <LinearLayout
@@ -227,17 +246,6 @@
         android:visibility="invisible" />
 
     <TextView
-        android:id="@+id/listWeek"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/addUser"
-        android:layout_alignTop="@+id/usersPanel"
-        android:layout_marginRight="27dp"
-        android:text="listWeek"
-        android:textSize="16sp"
-        android:visibility="invisible" />
-
-    <TextView
         android:id="@+id/usernameCurrentSchedule"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -256,5 +264,25 @@
         android:layout_centerHorizontal="true"
         android:text="Select User To View Schedule"
         android:textSize="35sp" />
+
+    <TextView
+        android:id="@+id/listWeek"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dummyListWeek"
+        android:layout_toRightOf="@+id/selectUserToViewSchedule"
+        android:text="listWeek"
+        android:textSize="16sp"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/listWeek"
+        android:layout_alignBottom="@+id/listWeek"
+        android:layout_alignParentRight="true"
+        android:text="E-mail"
+        android:background="@drawable/buttonpress" />
 
 </RelativeLayout>

@@ -218,10 +218,10 @@ public class TaskEnterActivity extends Activity {
         final LinearLayout vwParentRow = (LinearLayout)v.getParent();
 
         final TextView child = (TextView)vwParentRow.getChildAt(0);
-        final TextView hourNumber = (TextView)vwParentRow.getChildAt(2);
+        final TextView hourNumber = (TextView)vwParentRow.getChildAt(3);
         
-        final Button subtractBtnChild = (Button)vwParentRow.getChildAt(1);
-        final Button addBtnChild = (Button)vwParentRow.getChildAt(3);
+        final Button subtractBtnChild = (Button)vwParentRow.getChildAt(2);
+        final Button addBtnChild = (Button)vwParentRow.getChildAt(4);
                 
         subtractBtnChild.setOnClickListener(new OnClickListener() {
 			
@@ -244,8 +244,8 @@ public class TaskEnterActivity extends Activity {
 			}
 		}); 
         
-        int c = Color.DKGRAY;
-        vwParentRow.setBackgroundColor(c); 
+//        int c = Color.DKGRAY;
+//        vwParentRow.setBackgroundColor(c); 
         vwParentRow.refreshDrawableState(); 
 	}
 
@@ -254,10 +254,10 @@ public class TaskEnterActivity extends Activity {
 		final LinearLayout vwParentRow = (LinearLayout)v.getParent();
         
         final TextView child = (TextView)vwParentRow.getChildAt(0);
-        final TextView hourNumber = (TextView)vwParentRow.getChildAt(2);
+        final TextView hourNumber = (TextView)vwParentRow.getChildAt(3);
         
-        final Button subtractBtnChild = (Button)vwParentRow.getChildAt(1);
-        final Button addBtnChild = (Button)vwParentRow.getChildAt(3);
+        final Button subtractBtnChild = (Button)vwParentRow.getChildAt(2);
+        final Button addBtnChild = (Button)vwParentRow.getChildAt(4);
         
         final ListView addTaskLV = (ListView)findViewById(R.id.addTaskList);
         
@@ -285,8 +285,8 @@ public class TaskEnterActivity extends Activity {
 			}
 		}); 
         
-        int c = Color.DKGRAY;
-        vwParentRow.setBackgroundColor(c); 
+//        int c = Color.DKGRAY;
+//        vwParentRow.setBackgroundColor(c); 
         vwParentRow.refreshDrawableState(); 		
 	}
 	

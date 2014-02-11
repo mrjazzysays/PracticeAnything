@@ -13,7 +13,6 @@
         android:id="@+id/activityEnterTaskEnterMainLL"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:orientation="vertical" >
@@ -26,31 +25,69 @@
             android:layout_marginTop="33dp"
             android:text="TextView"
             android:textSize="60dp" />
-
-        <ListView
-            android:id="@+id/addTaskList"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-        </ListView>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/linearLayout1"
         android:orientation="vertical" >
 
-        <Button
-            android:id="@+id/addTask"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Add Task" />
-        <Button
-            android:id="@+id/submitTasks"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Submit Tasks" />
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal" >
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/addTaskList"
+        android:layout_width="641dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/linearLayout1"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/activityEnterTaskEnterMainLL"
+        android:layout_marginLeft="120dp" >
+
+    </ListView>
+
+    <Button
+        android:id="@+id/addTask"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/activityEnterTaskEnterMainLL"
+        android:layout_margin="5dp"
+        android:layout_toRightOf="@+id/addTaskList"
+        android:background="@drawable/graybuttonpress"
+        android:text="Add Task" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/addTask"
+        android:layout_margin="5dp"
+        android:layout_toRightOf="@+id/addTaskList"
+        android:background="@drawable/graybuttonpress"
+        android:text="Create Task Template" />
+
+    <Button
+        android:id="@+id/submitTasks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/button1"
+        android:layout_margin="5dp"
+        android:layout_toRightOf="@+id/addTaskList"
+        android:layout_weight="1"
+        android:background="@drawable/buttonpress"
+        android:text="Submit Tasks" />
 
 </RelativeLayout>

@@ -5,18 +5,24 @@
     android:orientation="vertical"
     android:id="@+id/taskViewLL">
 
-    
-
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/pleaseWorkLL" >
+        android:id="@+id/pleaseWorkLL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
 
 		<TextView
 		    android:id="@+id/taskName"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
-		    android:text="Taskname" />
+		    android:text="Taskname"
+		    android:textSize="20sp" />
+
+		<Button
+		    android:id="@+id/button2"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="Button"
+		    android:visibility="invisible" />
 
         <Button
             android:id="@+id/lessHours"
@@ -24,13 +30,15 @@
             android:layout_height="wrap_content"
             android:text="-"
             android:focusable="false"
-            android:onClick="onSubtractHourClick" />
+            android:onClick="onSubtractHourClick"
+            android:background="@drawable/minusbuttontaskviewcomplete" />
 
         <TextView
             android:id="@+id/hourNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0" />
+            android:text="0.0"
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/moreHours"
@@ -38,7 +46,22 @@
             android:layout_height="wrap_content"
             android:text="+"
             android:focusable="false"
-            android:onClick="onAddHourClick" />
+            android:onClick="onAddHourClick"
+            android:background="@drawable/plusbuttontaskviewcomplete" />
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/deleteCurrentTaskX"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/deletebuttonpress"
+            android:text="X" />
 
     </LinearLayout>
 

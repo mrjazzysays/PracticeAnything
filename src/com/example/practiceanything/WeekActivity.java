@@ -47,6 +47,7 @@ public class WeekActivity extends Activity {
 		
 		final Button addUserDialog = (Button)findViewById(R.id.addUsersBtn);
 		final Button deleteUserDialog = (Button)findViewById(R.id.deleteUsersBtn);
+		final Button emailBtn = (Button)findViewById(R.id.email);
 		Button deleteUserbtn = (Button)findViewById(R.id.deleteUsername);
 		Button addUserbtn = (Button)findViewById(R.id.addUser);
 		Button mondayBtn = (Button)findViewById(R.id.mondayBtn);
@@ -109,6 +110,21 @@ public class WeekActivity extends Activity {
 		fridayBtn.setText(fridayMod);
 		saturdayBtn.setText(saturdayMod);
 		sundayBtn.setText(sundayMod);
+		
+		emailBtn.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(Intent.ACTION_SEND);
+				intent.setType("message/rfc822");
+				intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"jeff.cedilla@pathway.com"});
+				intent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+				intent.putExtra(Intent.EXTRA_TEXT, "I'm email body.");
+
+				startActivity(Intent.createChooser(intent, "Send Email"));
+				
+			}
+		});
 		
 		addUserDialog.setOnClickListener(new OnClickListener() {
 			
